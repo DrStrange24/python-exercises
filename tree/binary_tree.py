@@ -49,29 +49,13 @@ class BinaryTree:
         nx.draw(graph, pos, with_labels=True, arrows=False)
         plt.show()
     
-    def find(s,val) -> Optional[Node]:
-        if s.is_empty():
+    def find(s, val, root:Node = None) -> Optional[Node]:
+        r = root if root is not None else s.root
+        if r is None:
             print('the tree is empty')
             return
 
-        stack = [s.root]
-        while stack:
-            cur_node = stack.pop()
-            if cur_node.val == val:
-                return cur_node
-            if cur_node.right: stack.append(cur_node.right)
-            if cur_node.left: stack.append(cur_node.left)
-
-        print('the node value doesnt exist')
-        return
-    
-    @staticmethod
-    def find_in_root(root: Node,val) -> Optional[Node]:
-        if root is None:
-            print('the tree is empty')
-            return
-
-        stack = [root]
+        stack = [r]
         while stack:
             cur_node = stack.pop()
             if cur_node.val == val:
@@ -130,7 +114,8 @@ def practice_binary_tree():
     for leaf in bt.get_leaves(subtree):
         print(leaf.val)
 
-    BinaryTree.find_in_root(subtree,5)
+    BinaryTree.find(bt,5,subtree)
+    BinaryTree.find(None,5,subtree)
 
     print(bt.is_leaf(subtree))
     print(bt.is_leaf(subtree.right))
