@@ -66,11 +66,11 @@ class BinaryTree:
         print('the node value doesnt exist')
         return
     
-    def find(s, val) -> Optional[Node]:
+    def find(s, val):
         return BinaryTree._private_static_find(s.root,val)
 
     @staticmethod
-    def _static_find(root:Node, val) -> Optional[Node]:
+    def _static_find(root:Node, val):
         return BinaryTree._private_static_find(root,val)
 
     def get_leaves(s,node:Node) -> List[Node]:
@@ -101,9 +101,22 @@ class BinaryTree:
         pass
 
     def remove(s,node:Node):
-        pass
+        stack = [s.root]
+        while stack:
+            cur_node = stack.pop()
+            if cur_node.right:
+                if cur_node.right.val == node.val:
+                    cur_node.right = None
+                    return
+                stack.append(cur_node.right)
+            if cur_node.left:
+                if cur_node.left.val == node.val:
+                    cur_node.left = None
+                    return
+                stack.append(cur_node.left)
+        print('node not found')
 
-    def parent(s,node:Node)->Node:
+    def parent(s,node:Node):
         stack = [s.root]
         while stack:
             cur_node = stack.pop()
@@ -139,6 +152,8 @@ def practice_binary_tree():
     subtree.val = 10
 
     print(bt.parent(bt.find(9)).val)
+
+    bt.remove(bt.find(6))
 
     bt.show_tree()
 
