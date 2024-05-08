@@ -7,5 +7,6 @@ get = O(n) = 1,000,000,000
 get = O(nlogn) + O(logn) = 30,000,000,030
 
 sorted list
-insert = summation of logn = 31,754,573,688
+insert n = summation of logn ceil = 28,926,258,207
+insert one = O(logn)
 get = O(logn) = 40
