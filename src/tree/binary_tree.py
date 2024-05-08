@@ -122,18 +122,30 @@ class BinaryTree:
         print('parent not found')
         return
 
+    def get_height(s)->int:
+        if s.is_empty():
+            print('tree is empty')
+            return
+        q = [s.root]
+        h = -1
+        while q:
+            cur_level = len(q)
+            for _ in range(cur_level):
+                cur_node = q.pop(0)
+                if cur_node.left: q.append(cur_node.left)
+                if cur_node.right: q.append(cur_node.right)
+            h+=1
+        return h
+
+    def get_depth(s,node)->int:
+        pass
+
     def is_siblings(s,node1:Node,node2:Node)->bool:
         pass
 
     def is_cousins(s,node1:Node,node2:Node)->bool:
         pass
 
-    def get_height(s)->int:
-        pass
-
-    def get_depth(s)->int:
-        pass
-    
 def practice_binary_tree():
     bt = BinaryTree()
     
@@ -155,7 +167,11 @@ def practice_binary_tree():
 
     print(bt.parent(bt.find(9)).val)
 
+    print(bt.get_height())
+
     bt.remove(bt.find(6))
+
+    print(bt.get_height())
 
     bt.show_tree()
 
