@@ -73,32 +73,22 @@ class BinaryTree:
     def _static_find(root:Node, val):
         return BinaryTree._private_static_find(root,val)
 
-    def get_leaves(s,node:Node) -> List[Node]:
-        if s.is_leaf(node):
+    @staticmethod
+    def _static_get_leaves(node:Node) -> List[Node]:
+        if BinaryTree._static_is_leaf(node):
             print('no leaves')
             return
         children = []
         if node.left: children.append(node.left)
         if node.right: children.append(node.right)
         return children
-
-    def get_height(s)->int:
-        pass
-
-    def get_depth(s)->int:
-        pass
-
-    def is_leaf(s,node:Node) -> bool:
+    
+    @staticmethod
+    def _static_is_leaf(node:Node) -> bool:
         return not (node.left or node.right)
 
     def is_empty(s) -> bool: 
         return s.root is None
-
-    def is_siblings(s,node1:Node,node2:Node)->bool:
-        pass
-
-    def is_cousins(s,node1:Node,node2:Node)->bool:
-        pass
 
     def remove(s,node:Node):
         stack = [s.root]
@@ -132,6 +122,18 @@ class BinaryTree:
         print('parent not found')
         return
 
+    def is_siblings(s,node1:Node,node2:Node)->bool:
+        pass
+
+    def is_cousins(s,node1:Node,node2:Node)->bool:
+        pass
+
+    def get_height(s)->int:
+        pass
+
+    def get_depth(s)->int:
+        pass
+    
 def practice_binary_tree():
     bt = BinaryTree()
     
@@ -139,13 +141,13 @@ def practice_binary_tree():
 
     subtree = bt.find(3)
 
-    for leaf in bt.get_leaves(subtree):
+    for leaf in BinaryTree._static_get_leaves(subtree):
         print(leaf.val)
 
     BinaryTree._static_find(subtree,5)
 
-    print(bt.is_leaf(subtree))
-    print(bt.is_leaf(subtree.right))
+    print(BinaryTree._static_is_leaf(subtree))
+    print(BinaryTree._static_is_leaf(subtree.right))
 
     subtree.left.left = BinaryTree.Node(8)
     subtree.left.right = BinaryTree.Node(9)
