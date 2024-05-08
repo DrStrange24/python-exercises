@@ -64,6 +64,23 @@ class BinaryTree:
 
         print('the node value doesnt exist')
         return
+    
+    @staticmethod
+    def find_in_root(root: Node,val) -> Optional[Node]:
+        if root is None:
+            print('the tree is empty')
+            return
+
+        stack = [root]
+        while stack:
+            cur_node = stack.pop()
+            if cur_node.val == val:
+                return cur_node
+            if cur_node.right: stack.append(cur_node.right)
+            if cur_node.left: stack.append(cur_node.left)
+
+        print('the node value doesnt exist')
+        return
 
     def get_leaves(s,node:Node) -> List[Node]:
         if s.is_leaf(node):
@@ -112,6 +129,8 @@ def practice_binary_tree():
 
     for leaf in bt.get_leaves(subtree):
         print(leaf.val)
+
+    BinaryTree.find_in_root(subtree,5)
 
     print(bt.is_leaf(subtree))
     print(bt.is_leaf(subtree.right))
