@@ -48,10 +48,10 @@ class LinkedList:
         s._private_check_for_empty_list()
 
         arr = []
-        h = s.head
-        while h:
-            arr.append(h.val)
-            h = h.next
+        cur_node = s.head
+        while cur_node:
+            arr.append(cur_node.val)
+            cur_node = cur_node.next
         return arr
 
     def insert_head(s, val):
