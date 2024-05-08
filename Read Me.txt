@@ -1,0 +1,24 @@
+-----------------------------------------------------------------------------------------------------------------------------
+Please Follow Naming Convention For Python:
+
+* for Variables, Functions, Methods, Module: 
+    * snake_case
+* for Constants: 
+    * SCREAMING_SNAKE_CASE or UPPER_SNAKE_CASE
+* for Classes: 
+    * PascalCase
+* for Packages:
+    * smallletternospace
+* for Private Variables and Functions:
+    * use prefix '_' + 'internal' or 'private' + snake_case
+* for Protected Variables and Functions:
+    * use prefix '_' + 'protected' + snake_case
+* Dunder (Magic) Methods:
+    * use prefix and suffix '__' + smallletternospace + '__'
+* Acronyms and Abbreviations:
+    * ALLCAPITALLETTER
+
+-----------------------------------------------------------------------------------------------------------------------------
+Other Practices:
+
+* place the inner class at the top
