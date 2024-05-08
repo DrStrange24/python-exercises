@@ -137,8 +137,20 @@ class BinaryTree:
             h+=1
         return h
 
-    def get_depth(s,node)->int:
-        pass
+    def get_depth(s,node):
+        if s.is_empty():
+            print('tree is empty')
+            return
+        q = [(s.root,0)]
+        while q:
+            cur_level = len(q)
+            for _ in range(cur_level):
+                cur_node,depth = q.pop(0)
+                if cur_node == node: return depth
+                if cur_node.left: q.append((cur_node.left,depth+1))
+                if cur_node.right: q.append((cur_node.right,depth+1))
+        print('node not found')
+        return
 
     def is_siblings(s,node1:Node,node2:Node)->bool:
         pass
@@ -172,6 +184,8 @@ def practice_binary_tree():
     bt.remove(bt.find(6))
 
     print(bt.get_height())
+
+    print(bt.get_depth(bt.find(2)))
 
     bt.show_tree()
 
