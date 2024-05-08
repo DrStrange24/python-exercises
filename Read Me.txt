@@ -21,4 +21,10 @@ Please Follow Naming Convention For Python:
 -----------------------------------------------------------------------------------------------------------------------------
 Other Practices:
 
-* place the inner class at the top
+* place the inner class at the top.
+* if a method can be use without instantiating the class while it is still related to the class, then still encapsulate the method with a separated static method.
+    need class instance |related    |method placement
+    true                |true       |inner
+    true                |false      |inner - not applicable
+    false               |true       |inner - static method
+    false               |false      |outer
