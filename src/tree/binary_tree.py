@@ -103,10 +103,18 @@ class BinaryTree:
     def remove(s,node:Node):
         pass
 
-    def parent(s,node:Node)->Optional[Node]:
+    def parent(s,node:Node)->Node:
         stack = [s.root]
         while stack:
-            cur_s = stack.pop()
+            cur_node = stack.pop()
+            if cur_node.right:
+                if cur_node.right.val == node.val:
+                    return cur_node
+                stack.append(cur_node.right)
+            if cur_node.left:
+                if cur_node.left.val == node.val:
+                    return cur_node
+                stack.append(cur_node.left)
             
         print('parent not found')
         return
@@ -129,6 +137,8 @@ def practice_binary_tree():
     subtree.left.left = BinaryTree.Node(8)
     subtree.left.right = BinaryTree.Node(9)
     subtree.val = 10
+
+    print(bt.parent(bt.find(9)).val)
 
     bt.show_tree()
 
