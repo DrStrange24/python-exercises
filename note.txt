@@ -1,0 +1,11 @@
+n = 1,000,000,000
+1000000000
+
+unordered list
+insert = O(1)
+get = O(n) = 1,000,000,000
+get = O(nlogn) + O(logn) = 30,000,000,030
+
+sorted list
+insert = summation of logn = 31,754,573,688
+get = O(logn) = 40
