@@ -31,6 +31,28 @@ class ListNode:
             head = head.next
         return list
 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+    
+    @staticmethod
+    def init_tree(l:list):
+        root = TreeNode(l[0])
+        q = [root]
+        i = 1
+        while i < len(l):
+            cur_root = q.pop(0)
+            if l[i]:
+                cur_root.left = TreeNode(l[i])
+                q.append(cur_root.left)
+            i+=1
+            if i < len(l) and l[i]:
+                cur_root.right = TreeNode(l[i])
+                q.append(cur_root.right)
+            i+=1
+        return root
 def track_time_execution(func:callable):
     start_time = time.time()
     func()
@@ -42,7 +64,7 @@ def track_time_execution(func:callable):
 
 class main_exercises():
     def __init__(s):
-        s.reverse_only_letters_test()
+        s.max_depth_test()
         # pass
 
     def test(s,result,expected):
@@ -162,3 +184,20 @@ class main_exercises():
             else:
                 l+=1
         return new_string
+    
+    def max_depth_test(s):
+        s.test(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
+        s.test(s.maxDepth(TreeNode.init_tree([1,None,2])),2)
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        d = 0
+        q = [root]
+        while q:
+            d+=1
+            cur_level = len(q)
+            for _ in range(cur_level):
+                cur_q = q.pop(0)
+                if cur_q.left: q.append(cur_q.left)
+                if cur_q.right: q.append(cur_q.right)
+        return d
