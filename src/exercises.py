@@ -42,7 +42,7 @@ def track_time_execution(func:callable):
 
 class main_exercises():
     def __init__(s):
-        track_time_execution(s.double_it_test)
+        s.double_it_test()
         # pass
 
     def test(s,result,expected):
