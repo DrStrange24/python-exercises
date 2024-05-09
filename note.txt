@@ -10,3 +10,11 @@ sorted list
 insert n = summation of logn ceil = 28,926,258,207
 insert one = O(logn)
 get = O(logn) = 40
+
+--------------------------------------------------------------- ---------------------------------------------------------------------------------------------------
+
+x = {}
+    dict = {key:value}
+    set =  {1,2,3,4} = unordered unique
+x = [] = list = [1,2,3,4] = array
+x = () = tuple = immutable list
