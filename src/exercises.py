@@ -1,6 +1,6 @@
 class main_exercises():
     def __init__(s):
-        
+        s.is_happy_test()
         pass
 
     def test(s,result,expected):
@@ -38,3 +38,21 @@ class main_exercises():
                 right+=1
             if right - left > max_len: max_len = right - left
         return max_len
+    
+    def is_happy_test(s):
+        s.test(s.isHappy(19),True)
+        s.test(s.isHappy(2),False)
+        s.test(s.isHappy(100),True)
+        s.test(s.isHappy(102),False)
+        s.test(s.isHappy(1),True)
+    def isHappy(self, n: int) -> bool:
+        str_num = str(n)
+        num_set = {n}
+        while True:
+            tem_sum = 0
+            for i in range(len(str_num)): tem_sum += int(str_num[i])**2
+            if tem_sum == 1: return True
+            else:
+                str_num = str(tem_sum)
+                if tem_sum in num_set: return False
+                else: num_set.add(tem_sum)
