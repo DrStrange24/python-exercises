@@ -17,14 +17,12 @@ class ListNode:
 
     @staticmethod
     def _static_print_list(head):
-        head:ListNode = head
         while head:
             print(head.val)
             head = head.next
     
     @staticmethod
     def _static_get_list(head):
-        head:ListNode = head
         list = []
         while head:
             list.append(head.val)
@@ -53,6 +51,23 @@ class TreeNode:
                 q.append(cur_root.right)
             i+=1
         return root
+    
+    @staticmethod
+    def get_list(root):
+        if root is None:
+            return []
+        res = []
+        q = [root]
+        while q:
+            node = q.pop(0)
+            if node:
+                res.append(node.val)
+                q.append(node.left)
+                q.append(node.right)
+            else: res.append(None)
+        while res and res[-1] is None: res.pop()
+        return res
+
 def track_time_execution(func:callable):
     start_time = time.time()
     func()
@@ -188,6 +203,8 @@ class main_exercises():
     def max_depth_test(s):
         s.test(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
         s.test(s.maxDepth(TreeNode.init_tree([1,None,2])),2)
+        print(TreeNode.get_list(TreeNode.init_tree([3,9,20,None,None,15,7])))
+        print(TreeNode.get_list(TreeNode.init_tree([1,None,2])))
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
