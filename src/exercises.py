@@ -1,9 +1,9 @@
-from typing import Optional
+from typing import Counter, List, Optional
 from linked_list import LinkedList
 
 class main_exercises():
     def __init__(s):
-        s.double_it_test()
+        s.intersect_test()
         # pass
 
     def test(s,result,expected):
@@ -48,7 +48,7 @@ class main_exercises():
         s.test(s.isHappy(100),True)
         s.test(s.isHappy(102),False)
         s.test(s.isHappy(1),True)
-    def isHappy(self, n: int) -> bool:
+    def isHappy(s, n: int) -> bool:
         str_num = str(n)
         num_set = {n}
         while True:
@@ -67,5 +67,17 @@ class main_exercises():
         ll1.insert_list([1,2,3])
         ll2.insert_list([1,2,3])
         print(ll1 == ll2)
-    def doubleIt(self, head: Optional[LinkedList]) -> Optional[LinkedList]:
+    def doubleIt(s, head: Optional[LinkedList]) -> Optional[LinkedList]:
         return None
+
+    def intersect_test(s):
+        s.test(s.intersect([1,2,2,1],[2,2]),[2,2])
+        s.test(s.intersect([4,9,5],[9,4,9,8,4]),[4,9] or [9,4])
+    def intersect(s, nums1: List[int], nums2: List[int]) -> List[int]:
+        cn1 = Counter(nums1)
+        cn2 = Counter(nums2)
+        ans = []
+        for k in cn1:
+            if k in cn2: ans.extend([k] * min(cn1[k],cn2[k]))
+        return ans
+    
