@@ -42,10 +42,11 @@ def track_time_execution(func:callable):
 
 class main_exercises():
     def __init__(s):
-        track_time_execution(s.intersect_test)
+        track_time_execution(s.double_it_test)
         # pass
 
     def test(s,result,expected):
+        # print(result,expected)
         print('pass' if result==expected else 'failed')
 
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
@@ -100,14 +101,36 @@ class main_exercises():
                 else: num_set.add(tem_sum)
 
     def double_it_test(s):
-        # s.test(s.doubleIt(),[])
-        ll1 = LinkedList()
-        ll2 = LinkedList()
-        ll1.insert_list([1,2,3])
-        ll2.insert_list([1,2,3])
-        print(ll1 == ll2)
-    def doubleIt(s, head: Optional[LinkedList]) -> Optional[LinkedList]:
-        return None
+        s.test(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([1,8,9]))),[3,7,8])
+        s.test(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([9,9,9]))),[1,9,9,8])
+    def doubleIt(s, head: Optional[ListNode]) -> Optional[ListNode]:
+        stack = []
+        while head:
+            stack.append(head.val)
+            head = head.next
+        cur_stack = stack.pop() * 2
+        r = 0
+        if cur_stack > 9: 
+            cur_stack -= 10
+            r = 1
+        new_head = ListNode(cur_stack)
+        while stack:
+            cur_stack = stack.pop()
+            cur_stack*=2
+            if r == 1:
+                cur_stack+=1
+                r = 0
+            if cur_stack > 9: 
+                cur_stack -= 10
+                r = 1
+            cur_node = ListNode(cur_stack)
+            cur_node.next = new_head
+            new_head = cur_node
+        if r == 1:
+            cur_node = ListNode(1)
+            cur_node.next = new_head
+            new_head = cur_node
+        return new_head
 
     def intersect_test(s):
         s.test(s.intersect([1,2,2,1],[2,2]),[2,2])
