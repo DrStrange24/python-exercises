@@ -16,13 +16,13 @@ class ListNode:
         return head
 
     @staticmethod
-    def _static_print_list(head):
+    def _static_print_list(head:'ListNode'):
         while head:
             print(head.val)
             head = head.next
     
     @staticmethod
-    def _static_get_list(head):
+    def _static_get_list(head:'ListNode'):
         list = []
         while head:
             list.append(head.val)
@@ -53,7 +53,7 @@ class TreeNode:
         return root
     
     @staticmethod
-    def get_list(root):
+    def get_list(root:'TreeNode'):
         if root is None:
             return []
         res = []
@@ -203,8 +203,6 @@ class main_exercises():
     def max_depth_test(s):
         s.test(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
         s.test(s.maxDepth(TreeNode.init_tree([1,None,2])),2)
-        print(TreeNode.get_list(TreeNode.init_tree([3,9,20,None,None,15,7])))
-        print(TreeNode.get_list(TreeNode.init_tree([1,None,2])))
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
