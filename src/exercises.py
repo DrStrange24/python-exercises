@@ -1,9 +1,48 @@
+import time
 from typing import Counter, List, Optional
-from linked_list import LinkedList
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+    @staticmethod
+    def _static_init_list(l:List):
+        head = ListNode(l[0])
+        cur_head = head
+        for v in l[1:]:
+            cur_head.next = ListNode(v)
+            cur_head = cur_head.next
+        return head
+
+    @staticmethod
+    def _static_print_list(head):
+        head:ListNode = head
+        while head:
+            print(head.val)
+            head = head.next
+    
+    @staticmethod
+    def _static_get_list(head):
+        head:ListNode = head
+        list = []
+        while head:
+            list.append(head.val)
+            head = head.next
+        return list
+
+def track_time_execution(func:callable):
+    start_time = time.time()
+    func()
+    end_time = time.time()
+    execution_time_seconds = end_time - start_time
+    execution_time_ms = execution_time_seconds * 1000
+    execution_time_ms = round(execution_time_ms, 2)
+    print("Execution time:", execution_time_ms, "ms")
 
 class main_exercises():
     def __init__(s):
-        s.intersect_test()
+        track_time_execution(s.intersect_test)
         # pass
 
     def test(s,result,expected):
