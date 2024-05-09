@@ -42,7 +42,7 @@ def track_time_execution(func:callable):
 
 class main_exercises():
     def __init__(s):
-        s.double_it_test()
+        s.reverse_only_letters_test()
         # pass
 
     def test(s,result,expected):
@@ -143,3 +143,22 @@ class main_exercises():
             if k in cn2: ans.extend([k] * min(cn1[k],cn2[k]))
         return ans
     
+    def reverse_only_letters_test(s):
+        s.test(s.reverse_only_letters('ab-cd'),'dc-ba')
+        s.test(s.reverse_only_letters('a-bC-dEf=ghlj!!'),'j-lh-gfE=dCba!!')
+    def reverse_only_letters(s,string:str):
+        new_string = string
+        l,r = 0,len(string)-1
+        while l < r:
+            if new_string[l].isalpha():
+                while not new_string[r].isalpha(): r-=1
+                if l < r:
+                    temp_char = new_string[l]
+                    new_string = new_string[:l] + new_string[r] + new_string[l+1:]
+                    l+=1
+                    new_string = new_string[:r] + temp_char + new_string[r+1:]
+                    r-=1
+                else: break
+            else:
+                l+=1
+        return new_string
