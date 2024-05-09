@@ -1,7 +1,7 @@
 class main_exercises():
     def __init__(s):
-        s.max_len_substring_test()
-        # pass
+        
+        pass
 
     def test(s,result,expected):
         print('pass' if result==expected else 'failed')
@@ -18,7 +18,6 @@ class main_exercises():
         s.test(s.maximumLengthSubstring('bcbbbcba'),4)
         s.test(s.maximumLengthSubstring('aaaa'),2)
         s.test(s.maximumLengthSubstring('sdaxczfdfsrere'),14)
-
     def maximumLengthSubstring(self, s: str) -> int:
         left = 0
         right = 0
