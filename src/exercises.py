@@ -1,7 +1,10 @@
+from typing import Optional
+from linked_list import LinkedList
+
 class main_exercises():
     def __init__(s):
-        s.is_happy_test()
-        pass
+        s.double_it_test()
+        # pass
 
     def test(s,result,expected):
         print('pass' if result==expected else 'failed')
@@ -56,3 +59,13 @@ class main_exercises():
                 str_num = str(tem_sum)
                 if tem_sum in num_set: return False
                 else: num_set.add(tem_sum)
+
+    def double_it_test(s):
+        # s.test(s.doubleIt(),[])
+        ll1 = LinkedList()
+        ll2 = LinkedList()
+        ll1.insert_list([1,2,3])
+        ll2.insert_list([1,2,3])
+        print(ll1 == ll2)
+    def doubleIt(self, head: Optional[LinkedList]) -> Optional[LinkedList]:
+        return None
