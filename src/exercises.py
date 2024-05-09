@@ -1,9 +1,10 @@
 class main_exercises():
     def __init__(s):
-        s.test()
+        s.max_len_substring_test()
+        # pass
 
-    def test(s):
-        print('Hello world')
+    def test(s,result,expected):
+        print('pass' if result==expected else 'failed')
 
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
         for i in range(len(nums)):
@@ -12,3 +13,29 @@ class main_exercises():
                 if abs(i-j) <= k:
                     return True
         return False
+
+    def max_len_substring_test(s):
+        s.test(s.maximumLengthSubstring('bcbbbcba'),4)
+        s.test(s.maximumLengthSubstring('aaaa'),2)
+        s.test(s.maximumLengthSubstring('sdaxczfdfsrere'),14)
+
+    def maximumLengthSubstring(self, s: str) -> int:
+        left = 0
+        right = 0
+        hash_table = {}
+        max_len = 0
+        while right<len(s) and left <= len(s)-max_len:
+            if s[right] not in hash_table:
+                hash_table[s[right]] = 1
+                right+=1
+            elif hash_table[s[right]] < 2:
+                hash_table[s[right]] += 1
+                right+=1
+            elif hash_table[s[right]] == 2:
+                while hash_table[s[right]] == 2:
+                    hash_table[s[left]]-=1
+                    left+=1
+                hash_table[s[right]] += 1
+                right+=1
+            if right - left > max_len: max_len = right - left
+        return max_len
