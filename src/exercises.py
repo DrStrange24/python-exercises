@@ -228,9 +228,40 @@ class main_exercises():
         s.test(s.reverse(123456789),987654321)
         s.test(s.reverse(900000),9)
         s.test(s.reverse(1534236469),0)
+        print()
+        s.test(s.reverse_math(123),321)
+        s.test(s.reverse_math(-123),-321)
+        s.test(s.reverse_math(120),21)
+        s.test(s.reverse_math(0),0)
+        s.test(s.reverse_math(1),1)
+        s.test(s.reverse_math(-1),-1)
+        s.test(s.reverse_math(123456789),987654321)
+        s.test(s.reverse_math(900000),9)
+        s.test(s.reverse_math(1534236469),0)
     def reverse(self, x: int) -> int:
         if not (-2**31 <= x <= 2**31 - 1): return 0
         ans = int(str(x)[::-1].replace('-',''))
         if x < 0: ans *= -1
         if not (-2**31 <= ans <= 2**31 - 1): return 0
         return ans
+    def reverse_math(self, x: int) -> int:
+        cur_x = x
+        if x == 0: return 0
+        np10 = 10 ** math.floor(math.log10(abs(x)))
+        if x < 0: cur_x *= -1
+        start = 10
+        end = np10 * 10
+        div = np10
+        s = 0
+        while start <= end:
+            num = cur_x % start
+            cur_x -= num
+            num/=start/10
+            num *= div
+            div/=10
+            s +=num
+            start *= 10
+        if x < 0: s *= -1
+        s = int(s)
+        if not (-2**31 <= s <= 2**31 - 1): return 0
+        return s
