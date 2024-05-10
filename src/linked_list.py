@@ -35,6 +35,15 @@ class LinkedList:
         while h:
             print(h.val)
             h = h.next
+    
+    def print_list_recursive(s):
+        s._private_check_for_empty_list()
+
+        def recursive(cur_node: LinkedList.Node):
+            if not cur_node: return
+            print(cur_node.val)
+            recursive(cur_node.next)
+        recursive(s.head)
 
     def _private_is_empty(s):
         return s.head is None
@@ -53,6 +62,14 @@ class LinkedList:
             arr.append(cur_node.val)
             cur_node = cur_node.next
         return arr
+    
+    def get_list_recursive(s):
+        s._private_check_for_empty_list()
+        def recursive(cur_node: LinkedList.Node,l:list=[]):
+            if not cur_node: return l
+            l.append(cur_node.val)
+            return recursive(cur_node.next,l)
+        return recursive(s.head)
 
     def insert_head(s, val):
         if s._private_is_empty():
@@ -168,3 +185,5 @@ def practice_linked_list():
     mll.delete_tail()
     mll.delete_index(1)
     print(mll.get_list())
+
+    print(mll.get_list_recursive())
