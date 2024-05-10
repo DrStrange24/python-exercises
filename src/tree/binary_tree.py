@@ -65,6 +65,72 @@ class BinaryTree:
 
         print('the node value doesnt exist')
         return
+
+    def find_recursive(s,val):
+        if s.root is None:
+            print('the tree is empty')
+            return
+        def recursive(cur_node:BinaryTree.Node):
+            print(cur_node.val)
+            if cur_node.left: recursive(cur_node.left)
+            if cur_node.right: recursive(cur_node.right)
+        return recursive(s.root)
+    
+    def to_list_pre_order(s):
+        '''root => left => right'''
+        if s.root is None:
+            print('the tree is empty')
+            return
+        res = []
+        def traverse(cur_node:BinaryTree.Node):
+            if cur_node is None: return
+            res.append(cur_node.val)
+            traverse(cur_node.left)
+            traverse(cur_node.right)
+        traverse(s.root)
+        return res
+    
+    def to_list_in_order(s):
+        '''left => root => right'''
+        if s.root is None:
+            print('the tree is empty')
+            return
+        res = []
+        def traverse(cur_node:BinaryTree.Node):
+            if cur_node is None: return
+            traverse(cur_node.left)
+            res.append(cur_node.val)
+            traverse(cur_node.right)
+        traverse(s.root)
+        return res
+    
+    def to_list_post_order(s):
+        '''left => right => root'''
+        if s.root is None:
+            print('the tree is empty')
+            return
+        res = []
+        def traverse(cur_node:BinaryTree.Node):
+            if cur_node is None: return
+            traverse(cur_node.left)
+            traverse(cur_node.right)
+            res.append(cur_node.val)
+        traverse(s.root)
+        return res
+    
+    def to_list_level_order(s):
+        '''breadth first search'''
+        if s.root is None:
+            print('the tree is empty')
+            return
+        q = [s.root]
+        res = []
+        while q:
+            cur_node = q.pop(0)
+            res.append(cur_node.val)
+            if cur_node.left: q.append(cur_node.left)
+            if cur_node.right: q.append(cur_node.right)
+        return res
     
     def find(s, val):
         return BinaryTree._private_static_find(s.root,val)
@@ -247,6 +313,13 @@ def practice_binary_tree():
     print('2,3 is_cousins:',bt.is_cousins_chatgpt_3(bt.find(2),bt.find(3)))
     print('8,15 is_cousins:',bt.is_cousins_chatgpt_3(bt.find(8),bt.find(15)))
 
+    print(bt.to_list_pre_order())
+    print(bt.to_list_in_order())
+    print(bt.to_list_post_order())
+    print(bt.to_list_level_order())
+
+    # subtree = bt.find_recursive(7)
+    
     bt.show_tree()
 
     # bt.init_tree([1,2,3,None,4,5,None,6,7,None,9,None,None,None,None,10,11])
