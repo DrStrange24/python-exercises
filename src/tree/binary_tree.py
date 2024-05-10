@@ -175,8 +175,30 @@ class BinaryTree:
             if cur_node.left: stack.append((cur_node.left, cur_node))
         return node1_parent and node2_parent and node1_parent == node2_parent
 
-    def is_cousins(s,node1:Node,node2:Node)->bool:
-        pass
+    def is_cousins_chatgpt_3(s,node1:Node,node2:Node)->bool:
+        if s.root is None or node1 is None or node2 is None: return False
+
+        stack = [(s.root, None, 0)]  # Stack to store nodes, their parent, and depth
+
+        node1_depth = None
+        node2_depth = None
+        node1_parent = None
+        node2_parent = None
+
+        while stack and (node1_depth is None or node2_depth is None):
+            cur_node, parent_node, depth = stack.pop()
+
+            if cur_node == node1:
+                node1_depth = depth
+                node1_parent = parent_node
+            elif cur_node == node2:
+                node2_depth = depth
+                node2_parent = parent_node
+
+            if cur_node.right: stack.append((cur_node.right, cur_node, depth + 1))
+            if cur_node.left: stack.append((cur_node.left, cur_node, depth + 1))
+
+        return node1_depth == node2_depth and node1_parent != node2_parent
 
 def practice_binary_tree():
     bt = BinaryTree()
@@ -220,6 +242,10 @@ def practice_binary_tree():
     print('4,5 is_siblings:',bt.is_siblings_chatgpt_3(bt.find(4),bt.find(5)))
     print('5,6 is_siblings:',bt.is_siblings_chatgpt_3(bt.find(5),bt.find(6)))
     print('6,7 is_siblings:',bt.is_siblings_chatgpt_3(bt.find(6),bt.find(7)))
+
+    print('5,6 is_cousins:',bt.is_cousins_chatgpt_3(bt.find(5),bt.find(6)))
+    print('2,3 is_cousins:',bt.is_cousins_chatgpt_3(bt.find(2),bt.find(3)))
+    print('8,15 is_cousins:',bt.is_cousins_chatgpt_3(bt.find(8),bt.find(15)))
 
     bt.show_tree()
 
