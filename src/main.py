@@ -4,6 +4,6 @@ from exercises import main_exercises
 from helper import string_replace_index
 
 # practice_linked_list()
-# practice_binary_tree()
+practice_binary_tree()
 
-main_exercises()
+# main_exercises()

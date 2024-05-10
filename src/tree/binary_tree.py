@@ -153,7 +153,15 @@ class BinaryTree:
         return
 
     def is_siblings(s,node1:Node,node2:Node)->bool:
-        pass
+        stack = [s.root]
+        while stack:
+            cur_node = stack.pop()
+            if cur_node.right:
+                if cur_node.right.val == node1.val: return cur_node.left.val == node2.val
+                stack.append(cur_node.right)
+            if cur_node.left:
+                if cur_node.left.val == node1.val: return cur_node.right.val == node2.val
+                stack.append(cur_node.left)
 
     def is_cousins(s,node1:Node,node2:Node)->bool:
         pass
@@ -189,8 +197,13 @@ def practice_binary_tree():
 
     bt.show_tree()
 
-    # bt.init_tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
-    # bt.show_tree()
+    bt.init_tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+
+    print('is_siblings:',bt.is_siblings(bt.find(4),bt.find(5)))
+    print('is_siblings:',bt.is_siblings(bt.find(5),bt.find(6)))
+    print('is_siblings:',bt.is_siblings(bt.find(6),bt.find(7)))
+
+    bt.show_tree()
 
     # bt.init_tree([1,2,3,None,4,5,None,6,7,None,9,None,None,None,None,10,11])
     # bt.show_tree()
