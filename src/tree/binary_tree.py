@@ -185,23 +185,25 @@ def practice_binary_tree():
     subtree.left.right = BinaryTree.Node(9)
     subtree.val = 10
 
-    print(bt.parent(bt.find(9)).val)
+    print('parent of 9',bt.parent(bt.find(9)).val)
 
-    print(bt.get_height())
+    print('height',bt.get_height())
+
+    bt.show_tree()
 
     bt.remove(bt.find(6))
 
-    print(bt.get_height())
+    print('height',bt.get_height())
 
-    print(bt.get_depth(bt.find(2)))
+    print('depth from 2',bt.get_depth(bt.find(2)))
 
     bt.show_tree()
 
     bt.init_tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 
-    print('is_siblings:',bt.is_siblings(bt.find(4),bt.find(5)))
-    print('is_siblings:',bt.is_siblings(bt.find(5),bt.find(6)))
-    print('is_siblings:',bt.is_siblings(bt.find(6),bt.find(7)))
+    print('4,5 is_siblings:',bt.is_siblings(bt.find(4),bt.find(5)))
+    print('5,6 is_siblings:',bt.is_siblings(bt.find(5),bt.find(6)))
+    print('6,7 is_siblings:',bt.is_siblings(bt.find(6),bt.find(7)))
 
     bt.show_tree()
 
