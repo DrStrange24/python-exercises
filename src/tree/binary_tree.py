@@ -70,11 +70,11 @@ class BinaryTree:
         if s.root is None:
             print('the tree is empty')
             return
-        def recursive(cur_node:BinaryTree.Node):
-            print(cur_node.val)
-            if cur_node.left: recursive(cur_node.left)
-            if cur_node.right: recursive(cur_node.right)
-        return recursive(s.root)
+        def traverse(cur_node:BinaryTree.Node):
+            if cur_node is None: return
+            if cur_node.val == val: return cur_node
+            return traverse(cur_node.left) or traverse(cur_node.right)
+        return traverse(s.root)
     
     def to_list_pre_order(s):
         '''root => left => right'''
@@ -318,8 +318,10 @@ def practice_binary_tree():
     print(bt.to_list_post_order())
     print(bt.to_list_level_order())
 
-    # subtree = bt.find_recursive(7)
-    
+    subtree = bt.find_recursive(7)
+    print(subtree.left.val,subtree.right.val)
+    print(bt.find_recursive(16))
+
     bt.show_tree()
 
     # bt.init_tree([1,2,3,None,4,5,None,6,7,None,9,None,None,None,None,10,11])
