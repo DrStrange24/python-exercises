@@ -89,6 +89,15 @@ class LinkedList:
                 cur_node = cur_node.next
             cur_node.next = new_tail
     
+    def insert_tail_recursive(s, val):
+        if s._private_is_empty():
+            s.head = s.Node(val)
+        else:
+            def recursive(cur_node:LinkedList.Node):
+                if cur_node.next is None: return cur_node
+                return recursive(cur_node.next)
+            recursive(s.head).next = s.Node(val)
+    
     def insert_index(s, val, index):
         if s._private_is_empty():
             s.head = s.Node(val)
@@ -111,6 +120,13 @@ class LinkedList:
         while cur_node.next:
             cur_node = cur_node.next
         return cur_node
+    
+    def get_tail_recursive(s):
+        s._private_check_for_empty_list()
+        def recursive(cur_node:LinkedList.Node):
+            if cur_node.next is None: return cur_node
+            return recursive(cur_node.next)
+        return recursive(s.head)
     
     def get_index(s, index):
         s._private_check_for_empty_list()
@@ -186,4 +202,6 @@ def practice_linked_list():
     mll.delete_index(1)
     print(mll.get_list())
 
+    mll.insert_tail_recursive(10)
     print(mll.get_list_recursive())
+    print(mll.get_tail_recursive().val)
