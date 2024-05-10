@@ -1,3 +1,4 @@
+import math
 import time
 from typing import Counter, List, Optional
 
@@ -79,7 +80,7 @@ def track_time_execution(func:callable):
 
 class main_exercises():
     def __init__(s):
-        s.max_depth_test()
+        s.reverse_test()
         # pass
 
     def test(s,result,expected):
@@ -216,3 +217,20 @@ class main_exercises():
                 if cur_q.left: q.append(cur_q.left)
                 if cur_q.right: q.append(cur_q.right)
         return d
+    
+    def reverse_test(s):
+        s.test(s.reverse(123),321)
+        s.test(s.reverse(-123),-321)
+        s.test(s.reverse(120),21)
+        s.test(s.reverse(0),0)
+        s.test(s.reverse(1),1)
+        s.test(s.reverse(-1),-1)
+        s.test(s.reverse(123456789),987654321)
+        s.test(s.reverse(900000),9)
+        s.test(s.reverse(1534236469),0)
+    def reverse(self, x: int) -> int:
+        if not (-2**31 <= x <= 2**31 - 1): return 0
+        ans = int(str(x)[::-1].replace('-',''))
+        if x < 0: ans *= -1
+        if not (-2**31 <= ans <= 2**31 - 1): return 0
+        return ans
