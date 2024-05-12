@@ -84,7 +84,8 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.binary_search_test()
+        # s.binary_search_test()
+        s.reverse_test()
         # pass
 
     def test1(s,result,expected):
@@ -227,25 +228,29 @@ class main_exercises():
         return d
     
     def reverse_test(s):
-        s.test1(s.reverse(123),321)
-        s.test1(s.reverse(-123),-321)
-        s.test1(s.reverse(120),21)
-        s.test1(s.reverse(0),0)
-        s.test1(s.reverse(1),1)
-        s.test1(s.reverse(-1),-1)
-        s.test1(s.reverse(123456789),987654321)
-        s.test1(s.reverse(900000),9)
-        s.test1(s.reverse(1534236469),0)
+        s.test2([
+            TestCase(s.reverse(123),321),
+            TestCase(s.reverse(-123),-321),
+            TestCase(s.reverse(120),21),
+            TestCase(s.reverse(0),0),
+            TestCase(s.reverse(1),1),
+            TestCase(s.reverse(-1),-1),
+            TestCase(s.reverse(123456789),987654321),
+            TestCase(s.reverse(900000),9),
+            TestCase(s.reverse(1534236469),0),
+        ])
         print()
-        s.test1(s.reverse_math(123),321)
-        s.test1(s.reverse_math(-123),-321)
-        s.test1(s.reverse_math(120),21)
-        s.test1(s.reverse_math(0),0)
-        s.test1(s.reverse_math(1),1)
-        s.test1(s.reverse_math(-1),-1)
-        s.test1(s.reverse_math(123456789),987654321)
-        s.test1(s.reverse_math(900000),9)
-        s.test1(s.reverse_math(1534236469),0)
+        s.test2([
+            TestCase(s.reverse_math(123),321),
+            TestCase(s.reverse_math(-123),-321),
+            TestCase(s.reverse_math(120),21),
+            TestCase(s.reverse_math(0),0),
+            TestCase(s.reverse_math(1),1),
+            TestCase(s.reverse_math(-1),-1),
+            TestCase(s.reverse_math(123456789),987654321),
+            TestCase(s.reverse_math(900000),9),
+            TestCase(s.reverse_math(1534236469),0),
+        ])
     def reverse(self, x: int) -> int:
         if not (-2**31 <= x <= 2**31 - 1): return 0
         ans = int(str(x)[::-1].replace('-',''))
