@@ -83,7 +83,7 @@ class main_exercises():
         s.reverse_test()
         # pass
 
-    def test(s,result,expected):
+    def test1(s,result,expected):
         # print(result,expected)
         print('pass' if result==expected else 'failed')
 
@@ -96,9 +96,9 @@ class main_exercises():
         return False
 
     def max_len_substring_test(s):
-        s.test(s.maximumLengthSubstring('bcbbbcba'),4)
-        s.test(s.maximumLengthSubstring('aaaa'),2)
-        s.test(s.maximumLengthSubstring('sdaxczfdfsrere'),14)
+        s.test1(s.maximumLengthSubstring('bcbbbcba'),4)
+        s.test1(s.maximumLengthSubstring('aaaa'),2)
+        s.test1(s.maximumLengthSubstring('sdaxczfdfsrere'),14)
     def maximumLengthSubstring(self, s: str) -> int:
         left = 0
         right = 0
@@ -121,11 +121,11 @@ class main_exercises():
         return max_len
     
     def is_happy_test(s):
-        s.test(s.isHappy(19),True)
-        s.test(s.isHappy(2),False)
-        s.test(s.isHappy(100),True)
-        s.test(s.isHappy(102),False)
-        s.test(s.isHappy(1),True)
+        s.test1(s.isHappy(19),True)
+        s.test1(s.isHappy(2),False)
+        s.test1(s.isHappy(100),True)
+        s.test1(s.isHappy(102),False)
+        s.test1(s.isHappy(1),True)
     def isHappy(s, n: int) -> bool:
         str_num = str(n)
         num_set = {n}
@@ -139,8 +139,8 @@ class main_exercises():
                 else: num_set.add(tem_sum)
 
     def double_it_test(s):
-        s.test(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([1,8,9]))),[3,7,8])
-        s.test(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([9,9,9]))),[1,9,9,8])
+        s.test1(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([1,8,9]))),[3,7,8])
+        s.test1(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([9,9,9]))),[1,9,9,8])
     def doubleIt(s, head: Optional[ListNode]) -> Optional[ListNode]:
         stack = []
         while head:
@@ -171,8 +171,8 @@ class main_exercises():
         return new_head
 
     def intersect_test(s):
-        s.test(s.intersect([1,2,2,1],[2,2]),[2,2])
-        s.test(s.intersect([4,9,5],[9,4,9,8,4]),[4,9] or [9,4])
+        s.test1(s.intersect([1,2,2,1],[2,2]),[2,2])
+        s.test1(s.intersect([4,9,5],[9,4,9,8,4]),[4,9] or [9,4])
     def intersect(s, nums1: List[int], nums2: List[int]) -> List[int]:
         cn1 = Counter(nums1)
         cn2 = Counter(nums2)
@@ -182,8 +182,8 @@ class main_exercises():
         return ans
     
     def reverse_only_letters_test(s):
-        s.test(s.reverse_only_letters('ab-cd'),'dc-ba')
-        s.test(s.reverse_only_letters('a-bC-dEf=ghlj!!'),'j-lh-gfE=dCba!!')
+        s.test1(s.reverse_only_letters('ab-cd'),'dc-ba')
+        s.test1(s.reverse_only_letters('a-bC-dEf=ghlj!!'),'j-lh-gfE=dCba!!')
     def reverse_only_letters(s,string:str):
         new_string = string
         l,r = 0,len(string)-1
@@ -202,8 +202,8 @@ class main_exercises():
         return new_string
     
     def max_depth_test(s):
-        s.test(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
-        s.test(s.maxDepth(TreeNode.init_tree([1,None,2])),2)
+        s.test1(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
+        s.test1(s.maxDepth(TreeNode.init_tree([1,None,2])),2)
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -219,25 +219,25 @@ class main_exercises():
         return d
     
     def reverse_test(s):
-        s.test(s.reverse(123),321)
-        s.test(s.reverse(-123),-321)
-        s.test(s.reverse(120),21)
-        s.test(s.reverse(0),0)
-        s.test(s.reverse(1),1)
-        s.test(s.reverse(-1),-1)
-        s.test(s.reverse(123456789),987654321)
-        s.test(s.reverse(900000),9)
-        s.test(s.reverse(1534236469),0)
+        s.test1(s.reverse(123),321)
+        s.test1(s.reverse(-123),-321)
+        s.test1(s.reverse(120),21)
+        s.test1(s.reverse(0),0)
+        s.test1(s.reverse(1),1)
+        s.test1(s.reverse(-1),-1)
+        s.test1(s.reverse(123456789),987654321)
+        s.test1(s.reverse(900000),9)
+        s.test1(s.reverse(1534236469),0)
         print()
-        s.test(s.reverse_math(123),321)
-        s.test(s.reverse_math(-123),-321)
-        s.test(s.reverse_math(120),21)
-        s.test(s.reverse_math(0),0)
-        s.test(s.reverse_math(1),1)
-        s.test(s.reverse_math(-1),-1)
-        s.test(s.reverse_math(123456789),987654321)
-        s.test(s.reverse_math(900000),9)
-        s.test(s.reverse_math(1534236469),0)
+        s.test1(s.reverse_math(123),321)
+        s.test1(s.reverse_math(-123),-321)
+        s.test1(s.reverse_math(120),21)
+        s.test1(s.reverse_math(0),0)
+        s.test1(s.reverse_math(1),1)
+        s.test1(s.reverse_math(-1),-1)
+        s.test1(s.reverse_math(123456789),987654321)
+        s.test1(s.reverse_math(900000),9)
+        s.test1(s.reverse_math(1534236469),0)
     def reverse(self, x: int) -> int:
         if not (-2**31 <= x <= 2**31 - 1): return 0
         ans = int(str(x)[::-1].replace('-',''))
