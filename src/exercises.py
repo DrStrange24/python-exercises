@@ -1,6 +1,6 @@
 import math
 import time
-from typing import Counter, List, Optional
+from typing import Any, Counter, List, NamedTuple, Optional
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -78,15 +78,23 @@ def track_time_execution(func:callable):
     execution_time_ms = round(execution_time_ms, 2)
     print("Execution time:", execution_time_ms, "ms")
 
+class TestCase(NamedTuple):
+    result: Any
+    expected: Any
+
 class main_exercises():
     def __init__(s):
-        s.reverse_test()
+        s.binary_search_test()
         # pass
 
     def test1(s,result,expected):
         # print(result,expected)
         print('pass' if result==expected else 'failed')
-
+    def test2(s,test_cases:List[TestCase]):
+        for i in range(len(test_cases)): 
+            test_result = 'Pass' if test_cases[i].result == test_cases[i].expected else 'Failed'
+            print(f'Case {i+1}: {test_result}')
+    
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
         for i in range(len(nums)):
             if nums[i] in nums[i+1:]:
@@ -265,3 +273,13 @@ class main_exercises():
         s = int(s)
         if not (-2**31 <= s <= 2**31 - 1): return 0
         return s
+    
+    def binary_search_test(s):
+        s.test2([
+            TestCase(s.binary_search([]),None),
+            TestCase(s.binary_search([1]),None),
+            TestCase(s.binary_search([1,2]),None),
+            TestCase(s.binary_search([1,2,3]),None),
+        ])
+    def binary_search(s,list:List):
+        return None
