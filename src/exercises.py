@@ -84,7 +84,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.binary_search_test()
+        s.reverse_only_letters_test()
         # pass
 
     def test1(s,result,expected):
@@ -195,24 +195,25 @@ class main_exercises():
         return ans
     
     def reverse_only_letters_test(s):
-        s.test1(s.reverse_only_letters('ab-cd'),'dc-ba')
-        s.test1(s.reverse_only_letters('a-bC-dEf=ghlj!!'),'j-lh-gfE=dCba!!')
+        s.test2([
+            TestCase(s.reverse_only_letters('ab-cd'),'dc-ba'),
+            TestCase(s.reverse_only_letters('a-bC-dEf=ghlj!!'),'j-lh-gfE=dCba!!'),
+        ])
     def reverse_only_letters(s,string:str):
-        new_string = string
-        l,r = 0,len(string)-1
+        ls = list(string)
+        l,r = 0,len(ls)-1
         while l < r:
-            if new_string[l].isalpha():
-                while not new_string[r].isalpha(): r-=1
-                if l < r:
-                    temp_char = new_string[l]
-                    new_string = new_string[:l] + new_string[r] + new_string[l+1:]
-                    l+=1
-                    new_string = new_string[:r] + temp_char + new_string[r+1:]
-                    r-=1
-                else: break
-            else:
+            while not ls[l].isalpha():
+                if l >= r: return ''.join(ls)
                 l+=1
-        return new_string
+            while not ls[r].isalpha():
+                if l >= r: return ''.join(ls)
+                r-=1
+            
+            ls[l], ls[r] = ls[r], ls[l]
+            l+=1
+            r-=1
+        return ''.join(ls)
     
     def max_depth_test(s):
         s.test1(s.maxDepth(TreeNode.init_tree([3,9,20,None,None,15,7])),3)
