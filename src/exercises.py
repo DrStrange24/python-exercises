@@ -307,17 +307,11 @@ class main_exercises():
             TestCase(s.binary_search(range(1,1001), 1000),999),
             TestCase(s.binary_search(range(1,1001), 2000),None),
         ])
-    def binary_search(s,data,target)->List[int]:
-        if len(data) == 0: return None
-        if len(data) == 1: return 0 if data[0] == target else None
-        
-        start_i = 0
-        end_i = len(data) - 1
-
-        while start_i<=end_i:
-            cur_i = math.floor((start_i+end_i)/2)
-            if target == data[cur_i]: return cur_i
-            if target > data[cur_i]: start_i = cur_i + 1
-            else: end_i = cur_i - 1
-
+    def binary_search(s, data, target):
+        left, right = 0, len(data) - 1
+        while left <= right:
+            mid = (left+right) // 2
+            if target == data[mid]: return mid
+            if target > data[mid]: left = mid + 1
+            else: right = mid - 1
         return None
