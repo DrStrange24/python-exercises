@@ -91,8 +91,11 @@ class main_exercises():
         # print(result,expected)
         print('pass' if result==expected else 'failed')
     def test2(s,test_cases:List[TestCase],show_details:bool = False):
+        RED = '\033[91m'
+        GREEN = '\033[92m'
+        END = '\033[0m'
         for i in range(len(test_cases)): 
-            test_result = 'Pass' if test_cases[i].result == test_cases[i].expected else 'Failed'
+            test_result = f'{GREEN}Passed{END}' if test_cases[i].result == test_cases[i].expected else f'{RED}Failed{END}'
             message = f'Case {i+1}: {test_result}'
             if show_details: message += f' Result: {test_cases[i].result} Expected: {test_cases[i].expected}'
             print(message)
