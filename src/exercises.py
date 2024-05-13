@@ -84,17 +84,18 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        # s.binary_search_test()
-        s.reverse_test()
+        s.binary_search_test()
         # pass
 
     def test1(s,result,expected):
         # print(result,expected)
         print('pass' if result==expected else 'failed')
-    def test2(s,test_cases:List[TestCase]):
+    def test2(s,test_cases:List[TestCase],show_details:bool = False):
         for i in range(len(test_cases)): 
             test_result = 'Pass' if test_cases[i].result == test_cases[i].expected else 'Failed'
-            print(f'Case {i+1}: {test_result}')
+            message = f'Case {i+1}: {test_result}'
+            if show_details: message += f' Result: {test_cases[i].result} Expected: {test_cases[i].expected}'
+            print(message)
     
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
         for i in range(len(nums)):
@@ -281,10 +282,42 @@ class main_exercises():
     
     def binary_search_test(s):
         s.test2([
-            TestCase(s.binary_search([]),None),
-            TestCase(s.binary_search([1]),None),
-            TestCase(s.binary_search([1,2]),None),
-            TestCase(s.binary_search([1,2,3]),None),
+            TestCase(s.binary_search([],1),None),
+            TestCase(s.binary_search([1],1),0),
+            TestCase(s.binary_search([1],2),None),
+            TestCase(s.binary_search([1,2],1),0),
+            TestCase(s.binary_search([1,2],2),1),
+            TestCase(s.binary_search([1,2],3),None),
+            TestCase(s.binary_search([1,2],-1),None),
+            TestCase(s.binary_search([1,2,3],1),0),
+            TestCase(s.binary_search([1,2,3],2),1),
+            TestCase(s.binary_search([1,2,3],3),2),
+            TestCase(s.binary_search([1,2,3],4),None),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5),4),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1),0),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),9),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
+            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
+            TestCase(s.binary_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2),2 or 1),
+            TestCase(s.binary_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
+            TestCase(s.binary_search([5], 5),0),
+            TestCase(s.binary_search([5], 10),None),
+            TestCase(s.binary_search(range(1,1001), 500),499),
+            TestCase(s.binary_search(range(1,1001), 1000),999),
+            TestCase(s.binary_search(range(1,1001), 2000),None),
         ])
-    def binary_search(s,list:List):
+    def binary_search(s,data,target)->List[int]:
+        if len(data) == 0: return None
+        if len(data) == 1: return 0 if data[0] == target else None
+        
+        start_i = 0
+        end_i = len(data) - 1
+
+        while start_i<=end_i:
+            cur_i = math.floor((start_i+end_i)/2)
+            if target == data[cur_i]: return cur_i
+            if target > data[cur_i]: start_i = cur_i + 1
+            else: end_i = cur_i - 1
+
         return None
