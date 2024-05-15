@@ -363,7 +363,7 @@ class main_exercises():
         return True
 
     def reverse_linkedlist_test(s):
-        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linked_list_chatgpt(ListNode._static_init_list(l)))
+        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linkedlist(ListNode._static_init_list(l)))
         s.test2([
             TestCase(shortcut([]),[]),
             TestCase(shortcut([0]),[0]),
@@ -377,21 +377,9 @@ class main_exercises():
             TestCase(shortcut([[1, 2], [3, 4], [5, 6]]),[[5, 6], [3, 4], [1, 2]]),
         ])
     def reverse_linkedlist(s,head: Optional[ListNode]) -> Optional[ListNode]:
-        if head is None: return None
-        def traverse(cur_node:ListNode) -> Tuple[Optional[ListNode],Optional[ListNode]]:
-            if cur_node is None: return None,None
-            new_head, prev_node = traverse(cur_node.next)
-            if prev_node: prev_node.next = cur_node
-            else: new_head = cur_node
-            return new_head,cur_node
-        res = traverse(head)
-        res[1].next = None
-        return res[0]
-    def reverse_linked_list_chatgpt(s,head:ListNode):
-        if head is None or head.next is None:
-            return head
-        reversed_head = s.reverse_linked_list_chatgpt(head.next)
+        if head is None or head.next is None: return head
+        new_head = s.reverse_linkedlist(head.next)
         head.next.next = head
         head.next = None
-        return reversed_head
+        return new_head
     
