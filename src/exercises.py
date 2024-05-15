@@ -4,8 +4,8 @@ from typing import Any, Counter, List, NamedTuple, Optional, Tuple
 
 class ListNode:
     def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+        self.val:Any = val
+        self.next:ListNode = next
 
     @staticmethod
     def _static_init_list(l:List):
@@ -363,7 +363,7 @@ class main_exercises():
         return True
 
     def reverse_linkedlist_test(s):
-        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linkedlist(ListNode._static_init_list(l)))
+        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linked_list_chatgpt(ListNode._static_init_list(l)))
         s.test2([
             TestCase(shortcut([]),[]),
             TestCase(shortcut([0]),[0]),
@@ -387,3 +387,11 @@ class main_exercises():
         res = traverse(head)
         res[1].next = None
         return res[0]
+    def reverse_linked_list_chatgpt(s,head:ListNode):
+        if head is None or head.next is None:
+            return head
+        reversed_head = s.reverse_linked_list_chatgpt(head.next)
+        head.next.next = head
+        head.next = None
+        return reversed_head
+    
