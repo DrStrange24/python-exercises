@@ -1,6 +1,6 @@
 import math
 import time
-from typing import Any, Counter, List, NamedTuple, Optional
+from typing import Any, Counter, List, NamedTuple, Optional, Tuple
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -85,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.compare_linkedlist_test()
+        s.reverse_linkedlist_test()
         # pass
 
     def test1(s,result,expected):
@@ -112,7 +112,7 @@ class main_exercises():
             print(f'All test cases have {test_result}')
         else:
             test_result = failed_message(f'{len(test_cases)-passed_count} Failed')
-            print(f'Passed: {passed_count}/{len(test_cases)}: {test_result}')
+            print(f'Passed:{passed_count}/{len(test_cases)} => {test_result}')
         print()
     
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
@@ -361,3 +361,29 @@ class main_exercises():
             head1 = head1.next
             head2 = head2.next
         return True
+
+    def reverse_linkedlist_test(s):
+        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linkedlist(ListNode._static_init_list(l)))
+        s.test2([
+            TestCase(shortcut([]),[]),
+            TestCase(shortcut([0]),[0]),
+            TestCase(shortcut([1]),[1]),
+            TestCase(shortcut([5]),[5]),
+            TestCase(shortcut([1,2,3]),[3,2,1]),
+            TestCase(shortcut([1, 2, 3, 4, 5]),[5, 4, 3, 2, 1]),
+            TestCase(shortcut([1, 1, 2, 2, 3, 3]),[3, 3, 2, 2, 1, 1]),
+            TestCase(shortcut(['a', 2, 'b', 4.5, True]),[True, 4.5, 'b', 2, 'a']),
+            TestCase(shortcut([1, None, 3, None, 5]),[5, None, 3, None, 1]),
+            TestCase(shortcut([[1, 2], [3, 4], [5, 6]]),[[5, 6], [3, 4], [1, 2]]),
+        ])
+    def reverse_linkedlist(s,head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None: return None
+        def traverse(cur_node:ListNode) -> Tuple[Optional[ListNode],Optional[ListNode]]:
+            if cur_node is None: return None,None
+            new_head, prev_node = traverse(cur_node.next)
+            if prev_node: prev_node.next = cur_node
+            else: new_head = cur_node
+            return new_head,cur_node
+        res = traverse(head)
+        res[1].next = None
+        return res[0]
