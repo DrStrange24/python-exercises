@@ -95,11 +95,25 @@ class main_exercises():
         RED = '\033[91m'
         GREEN = '\033[92m'
         END = '\033[0m'
+        passed_count = 0
+        def successed_message(message:str) -> str: return f'{GREEN}{message}{END}'
+        def failed_message(message:str) -> str: return f'{RED}{message}{END}'
         for i in range(len(test_cases)): 
-            test_result = f'{GREEN}Passed{END}' if test_cases[i].result == test_cases[i].expected else f'{RED}Failed{END}'
+            if test_cases[i].result == test_cases[i].expected:
+                test_result = successed_message('Passed')
+                passed_count+=1
+            else: test_result = failed_message('Failed')
             message = f'Case {i+1}: {test_result}'
             if show_details: message += f' Result: {test_cases[i].result} Expected: {test_cases[i].expected}'
             print(message)
+        print()
+        if passed_count==len(test_cases):
+            test_result = successed_message('Passed')
+            print(f'All test cases have {test_result}')
+        else:
+            test_result = failed_message(f'{len(test_cases)-passed_count} Failed')
+            print(f'Passed: {passed_count}/{len(test_cases)}: {test_result}')
+        print()
     
     def containsNearbyDuplicate(s, nums, k: int) -> bool:
         for i in range(len(nums)):
