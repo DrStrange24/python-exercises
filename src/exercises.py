@@ -9,6 +9,7 @@ class ListNode:
 
     @staticmethod
     def _static_init_list(l:List):
+        if len(l) == 0: return None
         head = ListNode(l[0])
         cur_head = head
         for v in l[1:]:
@@ -84,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.reverse_only_letters_test()
+        s.compare_linkedlist_test()
         # pass
 
     def test1(s,result,expected):
@@ -319,3 +320,30 @@ class main_exercises():
             if target > data[mid]: left = mid + 1
             else: right = mid - 1
         return None
+    
+    def compare_linkedlist_test(s):
+        s.test2([
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1,2,3,4]),ListNode._static_init_list([1,2,3,4])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1,2,3,4]),ListNode._static_init_list([1,2,3])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 2, 3, 4, 5]),ListNode._static_init_list([1, 2, 3, 4, 6])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 2, 3, 4, 5]),ListNode._static_init_list([5, 4, 3, 2, 1])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 2, 3, 4, 5]),ListNode._static_init_list([1, 2, 3])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 2, 3, 4, 5]),ListNode._static_init_list(['a', 'b', 'c', 'd', 'e'])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([]),ListNode._static_init_list([])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 1, 2, 3, 3, 4, 4, 5]),ListNode._static_init_list([1, 2, 2, 3, 4, 5])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([None, None, None]),ListNode._static_init_list([None, None, None])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1, 'a', None]),ListNode._static_init_list(['b', 2, None])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([1.0, 2.5, 3.7]),ListNode._static_init_list([1, 2.5, 3.7])),False),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([(1, 2), (3, 4)]),ListNode._static_init_list([(1, 2), (3, 4)])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([{'a': 1}, {'b': 2}]),ListNode._static_init_list([{'a': 1}, {'b': 2}])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([[1, 2], [3, 4]]),ListNode._static_init_list([[1, 2], [3, 4]])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([[]]),ListNode._static_init_list([[]])),True),
+            TestCase(s.compare_linkedlist(ListNode._static_init_list([math.nan]),ListNode._static_init_list([math.nan])),False),
+        ])
+    def compare_linkedlist(s,head1: Optional[ListNode],head2: Optional[ListNode]) -> bool:
+        while head1 or head2:
+            if head1 is None or head2 is None: return False
+            if type(head1.val)!=type(head2.val) or head1.val!=head2.val: return False
+            head1 = head1.next
+            head2 = head2.next
+        return True
