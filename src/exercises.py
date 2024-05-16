@@ -377,9 +377,13 @@ class main_exercises():
             TestCase(shortcut([[1, 2], [3, 4], [5, 6]]),[[5, 6], [3, 4], [1, 2]]),
         ])
     def reverse_linkedlist(s,head: Optional[ListNode]) -> Optional[ListNode]:
-        if head is None or head.next is None: return head
-        new_head = s.reverse_linkedlist(head.next)
-        head.next.next = head
-        head.next = None
-        return new_head
+        '''by chatgpt'''
+        prev = None
+        current = head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        return prev
     
