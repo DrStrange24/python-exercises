@@ -85,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.reverse_linkedlist_test()
+        s.alt_subsequence_best_test()
         # pass
 
     def test1(s,result,expected):
@@ -379,4 +379,19 @@ class main_exercises():
             prev = current
             current = next_node
         return prev
+    
+    def alt_subsequence_best_test(s) -> int:
+        s.test2([
+            TestCase(s.alt_subsequence_best([0,1,0,1,0]),5),
+            TestCase(s.alt_subsequence_best([0]),1),
+            TestCase(s.alt_subsequence_best([1,1,0,1,0]),4),
+        ])
+    def alt_subsequence_best(s,X:List[int]) -> int:
+        c,m = 1,0
+        for i in range(len(X)-1):
+            if X[i] != X[i+1]: c+=1
+            else:
+                if c > m: m = c
+                c = 1
+        return c
     
