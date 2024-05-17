@@ -128,25 +128,18 @@ class main_exercises():
         s.test1(s.maximumLengthSubstring('aaaa'),2)
         s.test1(s.maximumLengthSubstring('sdaxczfdfsrere'),14)
     def maximumLengthSubstring(self, s: str) -> int:
-        left = 0
-        right = 0
-        hash_table = {}
-        max_len = 0
-        while right<len(s) and left <= len(s)-max_len:
-            if s[right] not in hash_table:
-                hash_table[s[right]] = 1
-                right+=1
-            elif hash_table[s[right]] < 2:
-                hash_table[s[right]] += 1
-                right+=1
-            elif hash_table[s[right]] == 2:
-                while hash_table[s[right]] == 2:
-                    hash_table[s[left]]-=1
-                    left+=1
-                hash_table[s[right]] += 1
-                right+=1
-            if right - left > max_len: max_len = right - left
-        return max_len
+        l,r,ht,ml = 0,0,{},0
+        while r<len(s) and l <= len(s)-ml:
+            if s[r] not in ht: ht[s[r]] = 1
+            elif ht[s[r]] < 2: ht[s[r]] += 1
+            elif ht[s[r]] == 2:
+                while ht[s[r]] == 2:
+                    ht[s[l]]-=1
+                    l+=1
+                ht[s[r]] += 1
+            r+=1
+            if r - l > ml: ml = r - l
+        return ml
     
     def is_happy_test(s):
         s.test1(s.isHappy(19),True)
