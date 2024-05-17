@@ -385,6 +385,7 @@ class main_exercises():
             TestCase(s.alt_subsequence_best([0,1,0,1,0]),5),
             TestCase(s.alt_subsequence_best([0]),1),
             TestCase(s.alt_subsequence_best([1,1,0,1,0]),4),
+            TestCase(s.alt_subsequence_best([1,1,1,1,0,0,1,0,1,0]),5),
         ])
     def alt_subsequence_best(s,X:List[int]) -> int:
         c,m = 1,0
