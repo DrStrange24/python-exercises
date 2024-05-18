@@ -85,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.alt_subsequence_best_test()
+        s.squared_sum_test()
         # pass
 
     def test1(s,result,expected):
@@ -413,10 +413,23 @@ class main_exercises():
     
     def squared_sum_test(s):
         s.test2([
-            TestCase(s.squared_sum([1,-1,1,-1,1]),1),
-            TestCase(s.squared_sum([1,2,3]),36),
-            TestCase(s.squared_sum([0]),0),
-            TestCase(s.squared_sum([]),0),
+            TestCase(s.squared_sum_1([1,-1,1,-1,1]),1),
+            TestCase(s.squared_sum_1([1,2,3]),36),
+            TestCase(s.squared_sum_1([0]),0),
+            TestCase(s.squared_sum_1([]),0),
+            TestCase(s.squared_sum_1([1, -2, 3, 4]),49),
+            TestCase(s.squared_sum_1([1, 2, 3, 4]),100),
+            TestCase(s.squared_sum_1([-1, -2, -3, -4]),1),
+            TestCase(s.squared_sum_1([0, -1, 2, -3, 4]),16),
         ])
     def squared_sum(s,n:List[int]) -> int:
-        return sum(n)**2
+        l,s = 0, 0
+        for r in range(1,len(n)):
+            pass
+        return s**2
+    def squared_sum_1(s,n:List[int]) -> int:
+        ms = mc = 0
+        for num in n:
+            ms = max(0,ms+num)
+            mc = max(mc,ms**2)
+        return mc
