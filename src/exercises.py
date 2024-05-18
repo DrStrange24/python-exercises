@@ -85,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.squared_sum_test()
+        s.alt_subsequence_best_test()
         # pass
 
     def test1(s,result,expected):
@@ -382,10 +382,24 @@ class main_exercises():
     
     def alt_subsequence_best_test(s) -> int:
         s.test2([
-            TestCase(s.alt_subsequence_best([0,1,0,1,0]),5),
+            TestCase(s.alt_subsequence_best([0, 1, 0, 1, 0]),5),
             TestCase(s.alt_subsequence_best([0]),1),
+            TestCase(s.alt_subsequence_best([1]),1),
+            TestCase(s.alt_subsequence_best([0, 0, 0, 0, 0]),1),
+            TestCase(s.alt_subsequence_best([1, 1, 1, 1, 1]),1),
+            TestCase(s.alt_subsequence_best([0, 1, 0, 1, 0, 1, 0]),7),
+            TestCase(s.alt_subsequence_best([1, 0, 1, 0, 1, 0, 1]),7),
+            TestCase(s.alt_subsequence_best([0, 0, 1, 1, 0, 0, 1, 1, 0]),2),
+            TestCase(s.alt_subsequence_best([1, 1, 0, 0, 1, 1, 0, 0, 1]),2),
+            TestCase(s.alt_subsequence_best([0, 1] * 50000),100000),
+            TestCase(s.alt_subsequence_best([1, 0] * 50000),100000),
+            TestCase(s.alt_subsequence_best([0, 1, 0, 1, 0, 1, 0, 0]),7),
+            TestCase(s.alt_subsequence_best([1, 0, 1, 0, 1, 0, 1, 1]),7),
             TestCase(s.alt_subsequence_best([1,1,0,1,0]),4),
             TestCase(s.alt_subsequence_best([1,1,1,1,0,0,1,0,1,0]),5),
+            TestCase(s.alt_subsequence_best([1,1,0,1,0,0,1,1,1,0]),4),
+            TestCase(s.alt_subsequence_best([0, 0, 0, 0, 0, 0]),1),
+            TestCase(s.alt_subsequence_best([1, 1, 1, 1, 1, 1]),1),
         ])
     def alt_subsequence_best(s,X:List[int]) -> int:
         c,m = 1,0
@@ -394,7 +408,8 @@ class main_exercises():
             else:
                 if c > m: m = c
                 c = 1
-        return c
+        if c > m: m = c
+        return m
     
     def squared_sum_test(s):
         s.test2([
