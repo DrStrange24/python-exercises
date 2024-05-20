@@ -86,7 +86,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.invert_tree_test()
+        s.island_perimeter_test()
         # pass
 
     def test1(s,result,expected):
@@ -497,3 +497,20 @@ class main_exercises():
         s.invert_tree(root.right)
         return root
     
+    def island_perimeter_test(s):
+        s.test2([
+            TestCase(s.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]),16),
+            TestCase(s.islandPerimeter([[1]]),4),
+            TestCase(s.islandPerimeter([[1,0]]),4),
+            TestCase(s.islandPerimeter([[1,1],[1,1]]),8),
+        ])
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        '''by chatgpt'''
+        r,c,p = len(grid),len(grid[0]), 0
+        for i in range(r):
+            for j in range(c):
+                if grid[i][j] == 1:
+                    p += 4
+                    if j > 0 and grid[i][j - 1] == 1: p -= 2
+                    if i > 0 and grid[i - 1][j] == 1: p -= 2
+        return p
