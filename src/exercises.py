@@ -39,6 +39,7 @@ class TreeNode:
     
     @staticmethod
     def init_tree(l:list):
+        if len(l) == 0: return None
         root = TreeNode(l[0])
         q = [root]
         i = 1
@@ -85,7 +86,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.reverse_linkedlist_test()
+        s.compare_tree_test()
         # pass
 
     def test1(s,result,expected):
@@ -363,8 +364,7 @@ class main_exercises():
         ])
     def compare_linkedlist(s,head1: Optional[ListNode],head2: Optional[ListNode]) -> bool:
         while head1 or head2:
-            if (head1 is None 
-                or head2 is None 
+            if (head1 is None or head2 is None 
                 or type(head1.val)!=type(head2.val) 
                 or head1.val!=head2.val
                 ): return False
@@ -451,3 +451,28 @@ class main_exercises():
             ms = max(0,ms+num)
             mc = max(mc,ms**2)
         return mc
+
+    def compare_tree_test(s):
+        ctt = TreeNode.init_tree #convert to tree
+        tm = s.compare_tree #testing method
+        s.test2([
+            TestCase(tm(ctt([]),ctt([])),True),
+            TestCase(tm(ctt([]),ctt([1])),False),
+            TestCase(tm(ctt([1]),ctt([])),False),
+            TestCase(tm(ctt([1]),ctt([1])),True),
+            TestCase(tm(ctt([1,2,3]),ctt([1,2,3])),True),
+            TestCase(tm(ctt([1,2,3]),ctt([1,3,2])),False),
+            TestCase(tm(ctt([1,2,3,4,5,6,7]),ctt([1,2,3,4,5,6,7])),True),
+            TestCase(tm(ctt([1,2,3,4,5,6,7]),ctt([1,2,5,3,4,6,7])),False),
+            TestCase(tm(ctt([1, 2, 3, None, 4]),ctt([1, 2, 3, None, 4])),True),
+            TestCase(tm(ctt([1, 2]),ctt([2, 1])),False),
+            TestCase(tm(ctt([1, 2, 3]),ctt([1, 2, None, 3])),False),
+            TestCase(tm(ctt([1, 2, 3, 4]),ctt([1, 2, 3, 4, 5])),False),
+            TestCase(tm(ctt([1, 2, 3]),ctt([1, 2, 4])),False),
+            TestCase(tm(ctt([1, None, 2, None, 3,None, 4]),ctt([1, None, 2, None, 3,None, 4])),True),
+            TestCase(tm(ctt([1, 2, None, 3,None, 4]),ctt([1, 2, None, 3,None, 4])),True),
+        ],True)
+    def compare_tree(s,root1:Optional[TreeNode],root2:Optional[TreeNode])->bool:
+        if root1 is None and root2 is None: return True
+        if root1 is None or root2 is None: return False
+        return root1.val==root2.val and s.compare_tree(root1.left,root2.left) and s.compare_tree(root1.right,root2.right)
