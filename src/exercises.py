@@ -491,29 +491,9 @@ class main_exercises():
                      ,cltt([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,0,0,0,0,0,0,0,0,0,0,0,0])),
         ])
     def invert_tree(s, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root is None: return None
-        l = []
-        q = [root]
-        while q:
-            node = q.pop(0)
-            if node:
-                l.append(node.val)
-                q.append(node.right)
-                q.append(node.left)
-            else: l.append(None)
-        while l and l[-1] is None: l.pop()
-        if len(l) == 0: return None
-        nr = TreeNode(l[0])
-        q = [nr]
-        i = 1
-        while i < len(l):
-            cr = q.pop(0)
-            if l[i] is not None:
-                cr.left = TreeNode(l[i])
-                q.append(cr.left)
-            i+=1
-            if i < len(l) and l[i] is not None:
-                cr.right = TreeNode(l[i])
-                q.append(cr.right)
-            i+=1
-        return nr
+        if not root: return None
+        root.left, root.right = root.right, root.left 
+        s.invert_tree(root.left)
+        s.invert_tree(root.right)
+        return root
+    
