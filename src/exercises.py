@@ -33,9 +33,9 @@ class ListNode:
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+        self.val:Any = val
+        self.left:TreeNode = left
+        self.right:TreeNode = right
     
     @staticmethod
     def init_tree(l:list):
@@ -102,10 +102,8 @@ class main_exercises():
         def failed_message(message:str) -> str: return f'{RED}{message}{END}'
 
         def test_result_pass(test_case:TestCase) -> bool:
-            if isinstance(test_case.result,ListNode) and isinstance(test_case.expected,ListNode):
-                return s.compare_linkedlist(test_case.result,test_case.expected)
-            if isinstance(test_case.result,TreeNode) and isinstance(test_case.expected,TreeNode):
-                return False #coming soon
+            if isinstance(test_case.result,ListNode) and isinstance(test_case.expected,ListNode): return s.compare_linkedlist(test_case.result,test_case.expected)
+            if isinstance(test_case.result,TreeNode) and isinstance(test_case.expected,TreeNode): return s.compare_tree(test_case.result,test_case.expected)
             return test_case.result == test_case.expected
 
         for i in range(len(test_cases)): 
@@ -114,7 +112,11 @@ class main_exercises():
                 passed_count+=1
             else: test_result = failed_message('Failed')
             message = f'Case {i+1}: {test_result}'
-            if show_details: message += f' Result: {test_cases[i].result} Expected: {test_cases[i].expected}'
+            if show_details:
+                result, expected = test_cases[i].result, test_cases[i].expected
+                if isinstance(result,ListNode) and isinstance(expected,ListNode): result, expected = ListNode._static_get_list(result), ListNode._static_get_list(expected)
+                elif isinstance(result,TreeNode) and isinstance(expected,TreeNode): result, expected = TreeNode.get_list(result), TreeNode.get_list(expected)
+                message += f'\n   Result:   {result}\n   Expected: {expected}'
             print(message)
 
         print()
