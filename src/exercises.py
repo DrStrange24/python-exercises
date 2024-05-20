@@ -329,24 +329,24 @@ class main_exercises():
         return None
     
     def compare_linkedlist_test(s):
-        def short_method(list1:List,list2:List): return s.compare_linkedlist(ListNode._static_init_list(list1),ListNode._static_init_list(list2))
+        def short_func(list1:List,list2:List): return s.compare_linkedlist(ListNode._static_init_list(list1),ListNode._static_init_list(list2))
         s.test2([
-            TestCase(short_method([],[]),True),
-            TestCase(short_method([1,2,3,4],[1,2,3,4]),True),
-            TestCase(short_method([1,2,3,4],[1,2,3]),False),
-            TestCase(short_method([1, 2, 3, 4, 5],[1, 2, 3, 4, 6]),False),
-            TestCase(short_method([1, 2, 3, 4, 5],[5, 4, 3, 2, 1]),False),
-            TestCase(short_method([1, 2, 3, 4, 5],[1, 2, 3]),False),
-            TestCase(short_method([1, 2, 3, 4, 5],['a', 'b', 'c', 'd', 'e']),False),
-            TestCase(short_method([1, 1, 2, 3, 3, 4, 4, 5],[1, 2, 2, 3, 4, 5]),False),
-            TestCase(short_method([None, None, None],[None, None, None]),True),
-            TestCase(short_method([1, 'a', None],['b', 2, None]),False),
-            TestCase(short_method([1.0, 2.5, 3.7],[1, 2.5, 3.7]),False),
-            TestCase(short_method([(1, 2), (3, 4)],[(1, 2), (3, 4)]),True),
-            TestCase(short_method([{'a': 1}, {'b': 2}],[{'a': 1}, {'b': 2}]),True),
-            TestCase(short_method([[1, 2], [3, 4]],[[1, 2], [3, 4]]),True),
-            TestCase(short_method([[]],[[]]),True),
-            TestCase(short_method([math.nan],[math.nan]),False),
+            TestCase(short_func([],[]),True),
+            TestCase(short_func([1,2,3,4],[1,2,3,4]),True),
+            TestCase(short_func([1,2,3,4],[1,2,3]),False),
+            TestCase(short_func([1, 2, 3, 4, 5],[1, 2, 3, 4, 6]),False),
+            TestCase(short_func([1, 2, 3, 4, 5],[5, 4, 3, 2, 1]),False),
+            TestCase(short_func([1, 2, 3, 4, 5],[1, 2, 3]),False),
+            TestCase(short_func([1, 2, 3, 4, 5],['a', 'b', 'c', 'd', 'e']),False),
+            TestCase(short_func([1, 1, 2, 3, 3, 4, 4, 5],[1, 2, 2, 3, 4, 5]),False),
+            TestCase(short_func([None, None, None],[None, None, None]),True),
+            TestCase(short_func([1, 'a', None],['b', 2, None]),False),
+            TestCase(short_func([1.0, 2.5, 3.7],[1, 2.5, 3.7]),False),
+            TestCase(short_func([(1, 2), (3, 4)],[(1, 2), (3, 4)]),True),
+            TestCase(short_func([{'a': 1}, {'b': 2}],[{'a': 1}, {'b': 2}]),True),
+            TestCase(short_func([[1, 2], [3, 4]],[[1, 2], [3, 4]]),True),
+            TestCase(short_func([[]],[[]]),True),
+            TestCase(short_func([math.nan],[math.nan]),False),
         ])
     def compare_linkedlist(s,head1: Optional[ListNode],head2: Optional[ListNode]) -> bool:
         while head1 or head2:
