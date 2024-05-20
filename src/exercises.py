@@ -85,7 +85,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.compare_linkedlist_test()
+        s.reverse_linkedlist_test()
         # pass
 
     def test1(s,result,expected):
@@ -95,17 +95,28 @@ class main_exercises():
         RED = '\033[91m'
         GREEN = '\033[92m'
         END = '\033[0m'
+
         passed_count = 0
+
         def successed_message(message:str) -> str: return f'{GREEN}{message}{END}'
         def failed_message(message:str) -> str: return f'{RED}{message}{END}'
+
+        def test_result_pass(test_case:TestCase) -> bool:
+            if isinstance(test_case.result,ListNode) and isinstance(test_case.expected,ListNode):
+                return s.compare_linkedlist(test_case.result,test_case.expected)
+            if isinstance(test_case.result,TreeNode) and isinstance(test_case.expected,TreeNode):
+                return False #coming soon
+            return test_case.result == test_case.expected
+
         for i in range(len(test_cases)): 
-            if test_cases[i].result == test_cases[i].expected:
+            if test_result_pass(test_cases[i]):
                 test_result = successed_message('Passed')
                 passed_count+=1
             else: test_result = failed_message('Failed')
             message = f'Case {i+1}: {test_result}'
             if show_details: message += f' Result: {test_cases[i].result} Expected: {test_cases[i].expected}'
             print(message)
+
         print()
         if passed_count==len(test_cases):
             test_result = successed_message('Passed')
@@ -360,18 +371,19 @@ class main_exercises():
         return True
 
     def reverse_linkedlist_test(s):
-        def shortcut(l:List): return ListNode._static_get_list(s.reverse_linkedlist(ListNode._static_init_list(l)))
+        ctll = ListNode._static_init_list #convert to linked list
+        tm = s.reverse_linkedlist #testing method
         s.test2([
-            TestCase(shortcut([]),[]),
-            TestCase(shortcut([0]),[0]),
-            TestCase(shortcut([1]),[1]),
-            TestCase(shortcut([5]),[5]),
-            TestCase(shortcut([1,2,3]),[3,2,1]),
-            TestCase(shortcut([1, 2, 3, 4, 5]),[5, 4, 3, 2, 1]),
-            TestCase(shortcut([1, 1, 2, 2, 3, 3]),[3, 3, 2, 2, 1, 1]),
-            TestCase(shortcut(['a', 2, 'b', 4.5, True]),[True, 4.5, 'b', 2, 'a']),
-            TestCase(shortcut([1, None, 3, None, 5]),[5, None, 3, None, 1]),
-            TestCase(shortcut([[1, 2], [3, 4], [5, 6]]),[[5, 6], [3, 4], [1, 2]]),
+            TestCase(tm(ctll([])),ctll([])),
+            TestCase(tm(ctll([0])),ctll([0])),
+            TestCase(tm(ctll([1])),ctll([1])),
+            TestCase(tm(ctll([5])),ctll([5])),
+            TestCase(tm(ctll([1,2,3])),ctll([3,2,1])),
+            TestCase(tm(ctll([1, 2, 3, 4, 5])),ctll([5, 4, 3, 2, 1])),
+            TestCase(tm(ctll([1, 1, 2, 2, 3, 3])),ctll([3, 3, 2, 2, 1, 1])),
+            TestCase(tm(ctll(['a', 2, 'b', 4.5, True])),ctll([True, 4.5, 'b', 2, 'a'])),
+            TestCase(tm(ctll([1, None, 3, None, 5])),ctll([5, None, 3, None, 1])),
+            TestCase(tm(ctll([[1, 2], [3, 4], [5, 6]])),ctll([[5, 6], [3, 4], [1, 2]])),
         ])
     def reverse_linkedlist(s,head: Optional[ListNode]) -> Optional[ListNode]:
         '''by chatgpt'''
