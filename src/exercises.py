@@ -3,7 +3,7 @@ import time
 from typing import Any, Counter, List, NamedTuple, Optional, Tuple
 
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=None, next=None):
         self.val:Any = val
         self.next:ListNode = next
 
@@ -32,7 +32,7 @@ class ListNode:
         return list
 
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val=None, left=None, right=None):
         self.val:Any = val
         self.left:TreeNode = left
         self.right:TreeNode = right
@@ -45,11 +45,11 @@ class TreeNode:
         i = 1
         while i < len(l):
             cur_root = q.pop(0)
-            if l[i]:
+            if l[i] is not None:
                 cur_root.left = TreeNode(l[i])
                 q.append(cur_root.left)
             i+=1
-            if i < len(l) and l[i]:
+            if i < len(l) and l[i] is not None:
                 cur_root.right = TreeNode(l[i])
                 q.append(cur_root.right)
             i+=1
@@ -86,7 +86,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.compare_tree_test()
+        s.invert_tree_test()
         # pass
 
     def test1(s,result,expected):
@@ -471,8 +471,49 @@ class main_exercises():
             TestCase(tm(ctt([1, 2, 3]),ctt([1, 2, 4])),False),
             TestCase(tm(ctt([1, None, 2, None, 3,None, 4]),ctt([1, None, 2, None, 3,None, 4])),True),
             TestCase(tm(ctt([1, 2, None, 3,None, 4]),ctt([1, 2, None, 3,None, 4])),True),
-        ],True)
+        ])
     def compare_tree(s,root1:Optional[TreeNode],root2:Optional[TreeNode])->bool:
         if root1 is None and root2 is None: return True
         if root1 is None or root2 is None: return False
         return root1.val==root2.val and s.compare_tree(root1.left,root2.left) and s.compare_tree(root1.right,root2.right)
+
+    def invert_tree_test(s):
+        cltt = TreeNode.init_tree #convert list to tree
+        tm = s.invert_tree #testing method
+        s.test2([
+            TestCase(tm(cltt([])),cltt([])),
+            TestCase(tm(cltt([1])),cltt([1])),
+            TestCase(tm(cltt([1,2])),cltt([1,None,2])),
+            TestCase(tm(cltt([1,2,3])),cltt([1,3,2])),
+            TestCase(tm(cltt([1,2,3,4,5,6,7])),cltt([1,3,2,7,6,5,4])),
+            TestCase(tm(cltt([4,2,7,1,3,6,9])),cltt([4,7,2,9,6,3,1])),
+            TestCase(tm(cltt([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))
+                     ,cltt([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,0,0,0,0,0,0,0,0,0,0,0,0])),
+        ])
+    def invert_tree(s, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None: return None
+        l = []
+        q = [root]
+        while q:
+            node = q.pop(0)
+            if node:
+                l.append(node.val)
+                q.append(node.right)
+                q.append(node.left)
+            else: l.append(None)
+        while l and l[-1] is None: l.pop()
+        if len(l) == 0: return None
+        nr = TreeNode(l[0])
+        q = [nr]
+        i = 1
+        while i < len(l):
+            cr = q.pop(0)
+            if l[i] is not None:
+                cr.left = TreeNode(l[i])
+                q.append(cr.left)
+            i+=1
+            if i < len(l) and l[i] is not None:
+                cr.right = TreeNode(l[i])
+                q.append(cr.right)
+            i+=1
+        return nr
