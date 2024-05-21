@@ -308,35 +308,41 @@ class main_exercises():
         if not (-2**31 <= s <= 2**31 - 1): return 0
         return s
     
+    def search_data(s,algorithm: callable) -> List[TestCase]:
+        return [
+            TestCase(algorithm([],1),None),
+            TestCase(algorithm([1],1),0),
+            TestCase(algorithm([1],2),None),
+            TestCase(algorithm([1,2],1),0),
+            TestCase(algorithm([1,2],2),1),
+            TestCase(algorithm([1,2],3),None),
+            TestCase(algorithm([1,2],-1),None),
+            TestCase(algorithm([1,2,3],1),0),
+            TestCase(algorithm([1,2,3],2),1),
+            TestCase(algorithm([1,2,3],3),2),
+            TestCase(algorithm([1,2,3],4),None),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5),4),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1),0),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),9),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
+            TestCase(algorithm([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
+            TestCase(algorithm([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
+            TestCase(algorithm([5], 5),0),
+            TestCase(algorithm([5], 10),None),
+            TestCase(algorithm(range(1,1001), 500),499),
+            TestCase(algorithm(range(1,1001), 1000),999),
+            TestCase(algorithm(range(1,1001), 2000),None),
+            TestCase(algorithm(range(1,100001), 1),0),
+            TestCase(algorithm(range(1,100001), 50000),49999),
+            TestCase(algorithm(range(1,100001), 100000),99999),
+            TestCase(algorithm(range(1,10**6+1), 1),0),
+            TestCase(algorithm(range(1,10**6+1), 10**6/2),10**6/2-1),
+            TestCase(algorithm(range(1,10**6+1), 10**6),10**6-1),
+        ]
+
     def binary_search_test(s):
-        s.test2([
-            TestCase(s.binary_search([],1),None),
-            TestCase(s.binary_search([1],1),0),
-            TestCase(s.binary_search([1],2),None),
-            TestCase(s.binary_search([1,2],1),0),
-            TestCase(s.binary_search([1,2],2),1),
-            TestCase(s.binary_search([1,2],3),None),
-            TestCase(s.binary_search([1,2],-1),None),
-            TestCase(s.binary_search([1,2,3],1),0),
-            TestCase(s.binary_search([1,2,3],2),1),
-            TestCase(s.binary_search([1,2,3],3),2),
-            TestCase(s.binary_search([1,2,3],4),None),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5),4),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1),0),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),9),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
-            TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
-            TestCase(s.binary_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
-            TestCase(s.binary_search([5], 5),0),
-            TestCase(s.binary_search([5], 10),None),
-            TestCase(s.binary_search(range(1,1001), 500),499),
-            TestCase(s.binary_search(range(1,1001), 1000),999),
-            TestCase(s.binary_search(range(1,1001), 2000),None),
-            TestCase(s.binary_search(range(1,100001), 1),0),
-            TestCase(s.binary_search(range(1,100001), 50000),49999),
-            TestCase(s.binary_search(range(1,100001), 100000),99999),
-        ])
+        s.test2(s.search_data(s.binary_search))
     def binary_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
         left, right = 0, len(data) - 1
         while left <= right:
@@ -347,34 +353,7 @@ class main_exercises():
         return None
     
     def linear_search_test(s):
-        s.test2([
-            TestCase(s.linear_search([],1),None),
-            TestCase(s.linear_search([1],1),0),
-            TestCase(s.linear_search([1],2),None),
-            TestCase(s.linear_search([1,2],1),0),
-            TestCase(s.linear_search([1,2],2),1),
-            TestCase(s.linear_search([1,2],3),None),
-            TestCase(s.linear_search([1,2],-1),None),
-            TestCase(s.linear_search([1,2,3],1),0),
-            TestCase(s.linear_search([1,2,3],2),1),
-            TestCase(s.linear_search([1,2,3],3),2),
-            TestCase(s.linear_search([1,2,3],4),None),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5),4),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1),0),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),9),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
-            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
-            TestCase(s.linear_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
-            TestCase(s.linear_search([5], 5),0),
-            TestCase(s.linear_search([5], 10),None),
-            TestCase(s.linear_search(range(1,1001), 500),499),
-            TestCase(s.linear_search(range(1,1001), 1000),999),
-            TestCase(s.linear_search(range(1,1001), 2000),None),
-            TestCase(s.linear_search(range(1,100001), 1),0),
-            TestCase(s.linear_search(range(1,100001), 50000),49999),
-            TestCase(s.linear_search(range(1,100001), 100000),99999),
-        ])
+        s.test2(s.search_data(s.linear_search))
     def linear_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
         for i in range(len(data)):
             if data[i] == target: return i
