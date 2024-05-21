@@ -565,13 +565,26 @@ class main_exercises():
         s.test2(s.sort_data(s.merge_sort))
     def merge_sort(s,l:List[int])->List[int]:
         ll = len(l)
-        if ll>1:
-            nl, l1, l2 = [], s.merge_sort(l[:ll//2]), s.merge_sort(l[ll//2:])
-            while l1 or l2:
-                if not l1: nl.append(l2.pop(0))
-                elif not l2: nl.append(l1.pop(0))
-                elif l1[0] < l2[0]: nl.append(l1.pop(0))
-                else: nl.append(l2.pop(0))
-            return nl
-        return l
+        if ll <= 1: return l
+        m = ll // 2 # min
+        ls = s.merge_sort(l[:m]) #left sorted
+        rs = s.merge_sort(l[m:]) #right sorted
+        return s.merge(ls, rs)
+    def merge(s,l: List[int], r: List[int]) -> List[int]:
+        nsl = [] # new sorted list
+        li = ri = 0 #left_index, right_index
+        while li < len(l) and ri < len(r):
+            if l[li] <= r[ri]:
+                nsl.append(l[li])
+                li += 1
+            else:
+                nsl.append(r[ri])
+                ri += 1
+        while li < len(l):
+            nsl.append(l[li])
+            li += 1
+        while ri < len(r):
+            nsl.append(r[ri])
+            ri += 1
+        return nsl
     
