@@ -333,6 +333,9 @@ class main_exercises():
             TestCase(s.binary_search(range(1,1001), 500),499),
             TestCase(s.binary_search(range(1,1001), 1000),999),
             TestCase(s.binary_search(range(1,1001), 2000),None),
+            TestCase(s.binary_search(range(1,100001), 1),0),
+            TestCase(s.binary_search(range(1,100001), 50000),49999),
+            TestCase(s.binary_search(range(1,100001), 100000),99999),
         ])
     def binary_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
         left, right = 0, len(data) - 1
@@ -368,6 +371,9 @@ class main_exercises():
             TestCase(s.linear_search(range(1,1001), 500),499),
             TestCase(s.linear_search(range(1,1001), 1000),999),
             TestCase(s.linear_search(range(1,1001), 2000),None),
+            TestCase(s.linear_search(range(1,100001), 1),0),
+            TestCase(s.linear_search(range(1,100001), 50000),49999),
+            TestCase(s.linear_search(range(1,100001), 100000),99999),
         ])
     def linear_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
         for i in range(len(data)):
