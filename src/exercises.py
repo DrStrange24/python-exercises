@@ -87,7 +87,6 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.selection_sort_test)
         runtime(s.merge_sort_test)
         # pass
 
