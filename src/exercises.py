@@ -71,14 +71,15 @@ class TreeNode:
         while res and res[-1] is None: res.pop()
         return res
 
-def track_time_execution(func:callable):
+def runtime(func:callable):
     start_time = time.time()
     func()
     end_time = time.time()
     execution_time_seconds = end_time - start_time
     execution_time_ms = execution_time_seconds * 1000
-    execution_time_ms = round(execution_time_ms, 2)
-    print("Execution time:", execution_time_ms, "ms")
+    execution_time_ms = round(execution_time_ms)
+    print("Runtime:", execution_time_ms, "ms")
+    print()
 
 class TestCase(NamedTuple):
     result: Any
@@ -86,7 +87,8 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        s.merge_sort_test()
+        runtime(s.linear_search_test)
+        runtime(s.binary_search_test)
         # pass
 
     def test1(s,result,expected):
@@ -325,7 +327,6 @@ class main_exercises():
             TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
             TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
             TestCase(s.binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
-            TestCase(s.binary_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2),2 or 1),
             TestCase(s.binary_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
             TestCase(s.binary_search([5], 5),0),
             TestCase(s.binary_search([5], 10),None),
@@ -333,13 +334,44 @@ class main_exercises():
             TestCase(s.binary_search(range(1,1001), 1000),999),
             TestCase(s.binary_search(range(1,1001), 2000),None),
         ])
-    def binary_search(s, data, target):
+    def binary_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
         left, right = 0, len(data) - 1
         while left <= right:
             mid = (left+right) // 2
             if target == data[mid]: return mid
             if target > data[mid]: left = mid + 1
             else: right = mid - 1
+        return None
+    
+    def linear_search_test(s):
+        s.test2([
+            TestCase(s.linear_search([],1),None),
+            TestCase(s.linear_search([1],1),0),
+            TestCase(s.linear_search([1],2),None),
+            TestCase(s.linear_search([1,2],1),0),
+            TestCase(s.linear_search([1,2],2),1),
+            TestCase(s.linear_search([1,2],3),None),
+            TestCase(s.linear_search([1,2],-1),None),
+            TestCase(s.linear_search([1,2,3],1),0),
+            TestCase(s.linear_search([1,2,3],2),1),
+            TestCase(s.linear_search([1,2,3],3),2),
+            TestCase(s.linear_search([1,2,3],4),None),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5),4),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1),0),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),9),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),None),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11),None),
+            TestCase(s.linear_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 12),None),
+            TestCase(s.linear_search([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7),7),
+            TestCase(s.linear_search([5], 5),0),
+            TestCase(s.linear_search([5], 10),None),
+            TestCase(s.linear_search(range(1,1001), 500),499),
+            TestCase(s.linear_search(range(1,1001), 1000),999),
+            TestCase(s.linear_search(range(1,1001), 2000),None),
+        ])
+    def linear_search(s, data:Optional[List[int]], target:int) -> Optional[int]:
+        for i in range(len(data)):
+            if data[i] == target: return i
         return None
     
     def compare_linkedlist_test(s):
