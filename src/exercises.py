@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.bubble_sort_test)
+        runtime(s.selection_sort_test)
         # runtime(s.merge_sort)
         # pass
 
@@ -553,9 +553,9 @@ class main_exercises():
             TestCase(algorithm(list(range(10**4,0,-1))),list(range(1,10**4+1))),
         ]
     
-    def bubble_sort_test(s):
-        s.test2(s.sort_data(s.bubble_sort))
-    def bubble_sort(s,l:List[int])->List[int]:
+    def selection_sort_test(s):
+        s.test2(s.sort_data(s.selection_sort))
+    def selection_sort(s,l:List[int])->List[int]:
         for i in range(len(l)):
             for j in range(i+1,len(l)):
                 if l[j] < l[i]: l[i], l[j] = l[j], l[i]
