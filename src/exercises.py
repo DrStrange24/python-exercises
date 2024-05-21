@@ -87,8 +87,8 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.linear_search_test)
-        runtime(s.binary_search_test)
+        runtime(s.bubble_sort_test)
+        # runtime(s.merge_sort)
         # pass
 
     def test1(s,result,expected):
@@ -532,23 +532,40 @@ class main_exercises():
                     if i > 0 and grid[i - 1][j] == 1: p -= 2
         return p
 
+    def sort_data(s,algorithm: callable) -> List[TestCase]:
+        return [
+            TestCase(algorithm([8,7,6,5,4,3,2,1]),[1,2,3,4,5,6,7,8]),
+            TestCase(algorithm([5, 3, 8, 1, 2]),[1, 2, 3, 5, 8]),
+            TestCase(algorithm([1, 2, 3, 4, 5]),[1, 2, 3, 4, 5]),
+            TestCase(algorithm([5, 4, 3, 2, 1]),[1, 2, 3, 4, 5]),
+            TestCase(algorithm([7, 7, 7, 7, 7]),[7, 7, 7, 7, 7]),
+            TestCase(algorithm([10]),[10]),
+            TestCase(algorithm([10, 5]),[5, 10]),
+            TestCase(algorithm([3, -2, -5, 0, 1]),[-5, -2, 0, 1, 3]),
+            TestCase(algorithm([4, -1, 2, -6, 0, 7]),[-6, -1, 0, 2, 4, 7]),
+            TestCase(algorithm([1000000, 500, 100, 100000, 2500]),[100, 500, 2500, 100000, 1000000]),
+            TestCase(algorithm([]),[]),
+            TestCase(algorithm([0, 0, 0, 0, 0]),[0, 0, 0, 0, 0]),
+            TestCase(algorithm([1, 100, 2, 99, 3, 98]),[1, 2, 3, 98, 99, 100]),
+            TestCase(algorithm([9, 4, 6, 2, 7, 5, 3, 8, 1]),[1, 2, 3, 4, 5, 6, 7, 8, 9]),
+            TestCase(algorithm(list(range(100,0,-1))),list(range(1,101))),
+            TestCase(algorithm([4, 2, 4, 3, 4, 1, 2]),[1, 2, 2, 3, 4, 4, 4]),
+            TestCase(algorithm(list(range(10**4,0,-1))),list(range(1,10**4+1))),
+        ]
+    
+    def bubble_sort_test(s):
+        s.test2(s.sort_data(s.bubble_sort))
+    def bubble_sort(s,l:List[int])->List[int]:
+        for i in range(len(l)):
+            for j in range(i+1,len(l)):
+                if l[j] < l[i]: l[i], l[j] = l[j], l[i]
+        return l
+    
     def merge_sort_test(s):
-        s.test2([
-            TestCase(s.merge_sort([5, 3, 8, 1, 2]),[1, 2, 3, 5, 8]),
-            TestCase(s.merge_sort([1, 2, 3, 4, 5]),[1, 2, 3, 4, 5]),
-            TestCase(s.merge_sort([5, 4, 3, 2, 1]),[1, 2, 3, 4, 5]),
-            TestCase(s.merge_sort([7, 7, 7, 7, 7]),[7, 7, 7, 7, 7]),
-            TestCase(s.merge_sort([10]),[10]),
-            TestCase(s.merge_sort([10, 5]),[5, 10]),
-            TestCase(s.merge_sort([3, -2, -5, 0, 1]),[-5, -2, 0, 1, 3]),
-            TestCase(s.merge_sort([4, -1, 2, -6, 0, 7]),[-6, -1, 0, 2, 4, 7]),
-            TestCase(s.merge_sort([1000000, 500, 100, 100000, 2500]),[100, 500, 2500, 100000, 1000000]),
-            TestCase(s.merge_sort([]),[]),
-            TestCase(s.merge_sort([0, 0, 0, 0, 0]),[0, 0, 0, 0, 0]),
-            TestCase(s.merge_sort([1, 100, 2, 99, 3, 98]),[1, 2, 3, 98, 99, 100]),
-            TestCase(s.merge_sort([9, 4, 6, 2, 7, 5, 3, 8, 1]),[1, 2, 3, 4, 5, 6, 7, 8, 9]),
-            TestCase(s.merge_sort(sorted(range(1,101),reverse=True)),range(1,101)),
-            TestCase(s.merge_sort([4, 2, 4, 3, 4, 1, 2]),[1, 2, 2, 3, 4, 4, 4]),
-        ])
-    def merge_sort(s,l:List)->List:
+        s.test2(s.sort_data(s.merge_sort))
+    def merge_sort(s,l:List[int])->List[int]:
+        def dac(): #divide and conquer
+            pass
+        dac()
         return 
+    
