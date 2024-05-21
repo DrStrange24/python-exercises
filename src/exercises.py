@@ -88,7 +88,7 @@ class TestCase(NamedTuple):
 class main_exercises():
     def __init__(s):
         runtime(s.selection_sort_test)
-        # runtime(s.merge_sort)
+        runtime(s.merge_sort_test)
         # pass
 
     def test1(s,result,expected):
@@ -337,7 +337,7 @@ class main_exercises():
             TestCase(algorithm(range(1,100001), 50000),49999),
             TestCase(algorithm(range(1,100001), 100000),99999),
             TestCase(algorithm(range(1,10**7+1), 1),0),
-            TestCase(algorithm(range(1,10**7+1), 10**7/2),10**7/2-1),
+            TestCase(algorithm(range(1,10**7+1), 10**7/2),10**7//2-1),
             TestCase(algorithm(range(1,10**7+1), 10**7),10**7-1),
         ]
 
@@ -564,8 +564,14 @@ class main_exercises():
     def merge_sort_test(s):
         s.test2(s.sort_data(s.merge_sort))
     def merge_sort(s,l:List[int])->List[int]:
-        def dac(): #divide and conquer
-            pass
-        dac()
-        return 
+        ll = len(l)
+        if ll>1:
+            nl, l1, l2 = [], s.merge_sort(l[:ll//2]), s.merge_sort(l[ll//2:])
+            while l1 or l2:
+                if not l1: nl.append(l2.pop(0))
+                elif not l2: nl.append(l1.pop(0))
+                elif l1[0] < l2[0]: nl.append(l1.pop(0))
+                else: nl.append(l2.pop(0))
+            return nl
+        return l
     
