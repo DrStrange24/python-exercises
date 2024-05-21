@@ -336,9 +336,9 @@ class main_exercises():
             TestCase(algorithm(range(1,100001), 1),0),
             TestCase(algorithm(range(1,100001), 50000),49999),
             TestCase(algorithm(range(1,100001), 100000),99999),
-            TestCase(algorithm(range(1,10**6+1), 1),0),
-            TestCase(algorithm(range(1,10**6+1), 10**6/2),10**6/2-1),
-            TestCase(algorithm(range(1,10**6+1), 10**6),10**6-1),
+            TestCase(algorithm(range(1,10**7+1), 1),0),
+            TestCase(algorithm(range(1,10**7+1), 10**7/2),10**7/2-1),
+            TestCase(algorithm(range(1,10**7+1), 10**7),10**7-1),
         ]
 
     def binary_search_test(s):
