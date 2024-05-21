@@ -550,7 +550,7 @@ class main_exercises():
             TestCase(algorithm([9, 4, 6, 2, 7, 5, 3, 8, 1]),[1, 2, 3, 4, 5, 6, 7, 8, 9]),
             TestCase(algorithm(list(range(100,0,-1))),list(range(1,101))),
             TestCase(algorithm([4, 2, 4, 3, 4, 1, 2]),[1, 2, 2, 3, 4, 4, 4]),
-            TestCase(algorithm(list(range(10**4,0,-1))),list(range(1,10**4+1))),
+            TestCase(algorithm(list(range(10**3*5,0,-1))),list(range(1,10**3*5+1))),
         ]
     
     def selection_sort_test(s):
