@@ -563,23 +563,26 @@ class main_exercises():
     def merge_sort_test(s):
         s.test2(s.sort_data(s.merge_sort))
     def merge_sort(s,l:List[int])->List[int]:
-        if len(l) <= 1: return l
-        return s.merge(s.merge_sort(l[:len(l)//2]), s.merge_sort(l[len(l)//2:]))
-    def merge(s,l: List[int], r: List[int]) -> List[int]:
-        nsl = [] # new sorted list
-        li = ri = 0 #left_index, right_index
-        while li < len(l) and ri < len(r):
-            if l[li] <= r[ri]:
-                nsl.append(l[li])
-                li += 1
-            else:
-                nsl.append(r[ri])
-                ri += 1
-        while li < len(l):
-            nsl.append(l[li])
-            li += 1
-        while ri < len(r):
-            nsl.append(r[ri])
-            ri += 1
-        return nsl
+        def m(l:List[int],r:List[int])->List[int]: #merge(left,right)
+            nn = [] #new nums
+            li = ri = 0 # left and right index
+            while li<len(l) and ri<len(r):
+                if l[li] <= r[ri]:
+                    nn.append(l[li])
+                    li+=1
+                else:
+                    nn.append(r[ri])
+                    ri+=1
+            while li<len(l):
+                nn.append(l[li])
+                li+=1
+            while ri<len(r):
+                nn.append(r[ri])
+                ri+=1
+            return nn
+        def d(n: List[int]) -> List[int]: #divide(nums)
+            if len(n) <= 1: return n
+            mid = len(n)//2
+            return m(d(n[:mid]),d(n[mid:]))
+        return d(l)
     
