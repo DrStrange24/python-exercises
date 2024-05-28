@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.merge_sort_test)
+        runtime(s.linked_list_delete_duplicates_test)
         # pass
 
     def test1(s,result,expected):
@@ -586,3 +586,40 @@ class main_exercises():
             return m(d(n[:mid]),d(n[mid:]))
         return d(l)
     
+    def linked_list_delete_duplicates_test(s):
+        ctll = ListNode._static_init_list #convert to linked list
+        tm = s.linked_list_delete_duplicates #testing method
+        s.test2([
+            TestCase(tm(ctll([1,2,3,3,4,4,5])),ctll([1,2,5])),
+            TestCase(tm(ctll([1,1,1,2,3])),ctll([2,3])),
+            TestCase(tm(ctll([])),ctll([])),
+            TestCase(tm(ctll([2])),ctll([2])),
+            TestCase(tm(ctll([2,2,3])),ctll([3])),
+            TestCase(tm(ctll([3,5,5])),ctll([3])),
+        ])
+    def linked_list_delete_duplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        '''by chatgpt'''
+        if not head:
+            return None
+
+        # Dummy node to handle edge cases easily
+        new_head = ListNode(0)
+        new_head.next = head
+        prev = new_head  # The last node before the sequence of duplicates
+
+        while head:
+            # If we are at the start of a sequence of duplicates
+            if head.next and head.val == head.next.val:
+                # Move head to the end of the sequence of duplicates
+                while head.next and head.val == head.next.val:
+                    head = head.next
+                # Skip all duplicates
+                prev.next = head.next
+            else:
+                # No duplicates detected, move prev
+                prev = prev.next
+            
+            # Move head forward
+            head = head.next
+
+        return new_head.next
