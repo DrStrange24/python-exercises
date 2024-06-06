@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.min_common_num_test)
+        runtime(s.min_common_elements_test)
         # pass
 
     def test1(s,result,expected):
@@ -617,16 +617,44 @@ class main_exercises():
             ans = max(ans,cur_max)
         return ans
     
-    def min_common_num_test(s):
-        tm = s.min_common_num #testing method
+    def min_common_elements_test(s):
+        tm = s.min_common_elements #testing method
         s.test2([
             TestCase(tm([[1],[1],[1]]),1),
             TestCase(tm([[1],[1],[2]]),0),
             TestCase(tm([[1,2,3],[2,3,4],[3,4,5]]),3),
             TestCase(tm([[1,2,3],[2,3,4],[2,4,5]]),2),
+            TestCase(tm([
+                        [1, 2, 3],
+                        [2, 4, 6],
+                        [2, 7, 9]
+                    ]),2),
+            TestCase(tm([
+                        [1, 4, 5],
+                        [2, 3, 4],
+                        [4, 6, 7]
+                    ]),4),
+            TestCase(tm([
+                        [1, 2, 3],
+                        [4, 5, 6],
+                        [7, 8, 9]
+                    ]),0),
+            TestCase(tm([
+                        [5, 5, 5],
+                        [5, 5, 5],
+                        [5, 5, 5]
+                    ]),5),
+            TestCase(tm([
+                        [1, 3, 4, 5],
+                        [3, 5, 7, 9],
+                        [0, 3, 6, 8],
+                        [3, 4, 5, 6]
+                    ]),3),
         ])
-    def min_common_num(s,matrix:List[List[int]])->int:
+    def min_common_elements(s,matrix:List[List[int]])->int:
         ans = set(matrix[0])
         for row in matrix[1:]:
             ans &= set(row)
-        return list(ans)[0] if ans else 0
+            if not ans:
+                return 0
+        return min(ans) if ans else 0
