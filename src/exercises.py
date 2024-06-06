@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.max_sub_array_test)
+        runtime(s.min_common_num_test)
         # pass
 
     def test1(s,result,expected):
@@ -611,8 +611,27 @@ class main_exercises():
         ])
     def max_sub_array(self, nums: List[int]) -> int:
         '''Kadane's Algorithm'''
-        mc = ans = nums[0]
+        cur_max = ans = nums[0]
         for n in nums[1:]:
-            mc = max(n,mc+n)
-            ans = max(ans,mc)
+            cur_max = max(n,cur_max+n)
+            ans = max(ans,cur_max)
         return ans
+    
+    def min_common_num_test(s):
+        tm = s.min_common_num #testing method
+        s.test2([
+            TestCase(tm([[1],[1],[1]]),1),
+            TestCase(tm([[1],[1],[2]]),0),
+            TestCase(tm([[1,2,3],[2,3,4],[3,4,5]]),3),
+            TestCase(tm([[1,2,3],[2,3,4],[2,4,5]]),2),
+        ])
+    def min_common_num(s,matrix:List[List[int]])->int:
+        for num in matrix[0]:
+            all_exist = True
+            for row in matrix[1:]:
+                if num not in row:
+                    all_exist = False
+                    break
+            if all_exist:
+                return num
+        return 0
