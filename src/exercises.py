@@ -626,12 +626,7 @@ class main_exercises():
             TestCase(tm([[1,2,3],[2,3,4],[2,4,5]]),2),
         ])
     def min_common_num(s,matrix:List[List[int]])->int:
-        for num in matrix[0]:
-            all_exist = True
-            for row in matrix[1:]:
-                if num not in row:
-                    all_exist = False
-                    break
-            if all_exist:
-                return num
-        return 0
+        ans = set(matrix[0])
+        for row in matrix[1:]:
+            ans &= set(row)
+        return list(ans)[0] if ans else 0
