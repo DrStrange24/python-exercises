@@ -666,11 +666,11 @@ class main_exercises():
         ])
     def pyramid_asterisk(s,num):
         mid_index = (num*2-1)//2
-        for i in range(num):
-            start_index = mid_index-i
-            end_index = mid_index+i
-            for j in range(2*num):
-                if start_index <= j <= end_index:
+        for row in range(num):
+            start_index = mid_index-row
+            end_index = mid_index+row
+            for column in range(2*num):
+                if start_index <= column <= end_index:
                     print('*',end=' ')
                 else:
                     print(' ',end=' ')
