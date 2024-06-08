@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.min_common_elements_test)
+        runtime(s.pyramid_asterisk_test)
         # pass
 
     def test1(s,result,expected):
@@ -658,3 +658,22 @@ class main_exercises():
             if not ans:
                 return 0
         return min(ans) if ans else 0
+
+    def pyramid_asterisk_test(s):
+        tm = s.pyramid_asterisk #testing method
+        s.test2([
+            TestCase(tm(5),None),
+        ])
+    def pyramid_asterisk(s,num):
+        mid_index = (num*2-1)//2
+        for i in range(num):
+            start_index = mid_index-i
+            end_index = mid_index+i
+            for j in range(2*num):
+                if start_index <= j <= end_index:
+                    print('*',end=' ')
+                else:
+                    print(' ',end=' ')
+            print()
+        return None
+    
