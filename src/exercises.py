@@ -665,15 +665,9 @@ class main_exercises():
             TestCase(tm(5),None),
         ])
     def pyramid_asterisk(s,num):
-        mid_index = (num*2-1)//2
-        for row in range(num):
-            start_index = mid_index-row
-            end_index = mid_index+row
-            for column in range(2*num):
-                if start_index <= column <= end_index:
-                    print('*',end=' ')
-                else:
-                    print(' ',end=' ')
-            print()
+        for n in range(1,num+1):
+            spaces = '  '*(num-n)
+            asterisk = '* '*(n*2-1)
+            print(spaces+asterisk+spaces)
         return None
     
