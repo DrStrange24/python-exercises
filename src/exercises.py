@@ -658,16 +658,3 @@ class main_exercises():
             if not ans:
                 return 0
         return min(ans) if ans else 0
-
-    def pyramid_asterisk_test(s):
-        tm = s.pyramid_asterisk #testing method
-        s.test2([
-            TestCase(tm(5),None),
-        ])
-    def pyramid_asterisk(s,num):
-        for n in range(1,num+1):
-            spaces = '  '*(num-n)
-            asterisk = '* '*(n*2-1)
-            print(spaces+asterisk+spaces)
-        return None
-    
