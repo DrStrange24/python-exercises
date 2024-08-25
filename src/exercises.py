@@ -87,7 +87,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.pyramid_asterisk_test)
+        runtime(s.turing_python_practical1_test)
         # pass
 
     def test1(s,result,expected):
@@ -658,3 +658,18 @@ class main_exercises():
             if not ans:
                 return 0
         return min(ans) if ans else 0
+
+    def turing_python_practical1_test(s):
+        """i forgot the problem"""
+        tm = s.turing_python_practical1 #testing method
+        s.test2([
+            TestCase(tm([3,2,1,4]),0),
+            TestCase(tm([4,2,1,4]),1),
+            TestCase(tm([2,3,4,5]),4),
+            TestCase(tm([5, 3, 2, 6]),6),
+            TestCase(tm([1, 1, 1, 1]),6),
+            TestCase(tm([4, 3, 2, 1]),0),
+        ])
+    def turing_python_practical1(s,num:List[int])->int:
+        num.sort()
+        return sum([abs(num[i]-(i+1)) for i in range(len(num))])
