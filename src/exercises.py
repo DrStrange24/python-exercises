@@ -88,7 +88,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.remove_punctuation_test)
+        runtime(s.filter_primes_test)
         # pass
 
     def test1(s,result,expected):
@@ -693,4 +693,27 @@ class main_exercises():
     def remove_punctuation(s,input_string:str)->str:
         return ''.join(c for c in list(input_string) if c not in string.punctuation)
     
-    
+    def filter_primes_test(s):
+        tm = s.filter_primes #testing method
+        s.test2([
+            TestCase(tm([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]),[2, 3, 5, 7, 11, 13]),
+            TestCase(tm([2, 3, 4, 5, 6, 7, 8, 9, 10]), [2, 3, 5, 7]),
+            TestCase(tm([11, 13, 17, 19, 23, 29]), [11, 13, 17, 19, 23, 29]),
+            TestCase(tm([1, 4, 6, 8, 10, 12, 14]), []),
+            TestCase(tm([2, 3, 5, 7, 11, 13, 16, 18]), [2, 3, 5, 7, 11, 13]),
+            TestCase(tm([20, 21, 22, 23, 24, 25, 26, 27, 28, 29]), [23, 29]),
+            TestCase(tm([31, 37, 41, 43, 47, 51, 53]), [31, 37, 41, 43, 47, 53]),
+            TestCase(tm([50, 55, 60, 65, 70]), []),
+            TestCase(tm([97, 100, 101, 103, 107]), [97, 101, 103, 107]),
+            TestCase(tm([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), [2, 3, 5, 7]),
+            TestCase(tm([]), []),  # Edge case: empty list should return an empty list
+        ])
+    def filter_primes(s,num_list:List[int])->List[int]:
+        def is_prime(num):
+            if num <= 1:
+                return False
+            for i in range(2, int(num**0.5) + 1):
+                if num % i == 0:
+                    return False
+            return True
+        return [n for n in num_list if is_prime(n)]
