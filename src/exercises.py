@@ -1,4 +1,5 @@
 import math
+import string
 import time
 from typing import Any, Counter, List, NamedTuple, Optional, Tuple
 
@@ -87,7 +88,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.turing_python_practical1_test)
+        runtime(s.remove_punctuation_test)
         # pass
 
     def test1(s,result,expected):
@@ -673,3 +674,23 @@ class main_exercises():
     def turing_python_practical1(s,num:List[int])->int:
         num.sort()
         return sum([abs(num[i]-(i+1)) for i in range(len(num))])
+    
+    def remove_punctuation_test(s):
+        tm = s.remove_punctuation #testing method
+        s.test2([
+            TestCase(tm('Hello, World! This is a test-string.'),'Hello World This is a teststring'),
+            TestCase(tm('Hello, World!'), 'Hello World'),
+            TestCase(tm('Good morning! Have a nice day.'), 'Good morning Have a nice day'),
+            TestCase(tm('!@#$%^&*()'), ''),
+            TestCase(tm('This is a clean string'), 'This is a clean string'),
+            TestCase(tm('Python3.8 is cool, isn\'t it?'), 'Python38 is cool isnt it'),
+            TestCase(tm(''), ''),
+            TestCase(tm('!!!Start and end with punctuation???'), 'Start and end with punctuation'),
+            TestCase(tm('Hello, World!\nHow are you?\tI\'m fine.'), 'Hello World\nHow are you\tIm fine'),
+            TestCase(tm('The price is $99.99!'), 'The price is 9999'),
+            TestCase(tm('H-e-l-l-o W-o-r-l-d!'), 'Hello World'),
+        ])
+    def remove_punctuation(s,input_string:str)->str:
+        return ''.join(c for c in list(input_string) if c not in string.punctuation)
+    
+    
