@@ -72,6 +72,111 @@ class TreeNode:
         while res and res[-1] is None: res.pop()
         return res
 
+class DoublyLinkedListNode:
+    def __init__(self, data = None):
+        self.data:Any = data # Data stored in the node
+        self.prev:DoublyLinkedListNode = None # Pointer to the previous node (initially None)
+        self.next:DoublyLinkedListNode = None # Pointer to the next node (initially None)
+    
+    @staticmethod
+    def to_dll(l:list) -> 'DoublyLinkedListNode':
+        """
+        Converts a Python list (array) into a doubly linked list (DLL).
+
+        This method iterates over the elements in the array, creating nodes
+        for each element and linking them into a doubly linked list structure.
+        The head of the doubly linked list will point to the first element.
+
+        Args:
+            l (list): A Python list containing the elements to convert into a DLL.
+
+        Returns:
+            DoublyLinkedListNode: Return the head of Doubly Linked List.
+        """
+        if len(l) == 0:
+            return None  # If the array is empty, return None
+
+        # Create the head node from the first element in the array
+        head = DoublyLinkedListNode(l[0])
+        current = head
+
+        # Iterate over the remaining elements in the array
+        for i in range(1, len(l)):
+            new_node = DoublyLinkedListNode(l[i])   # Create a new node
+            current.next = new_node   # Link the current node's next to the new node
+            new_node.prev = current   # Link the new node's prev to the current node
+            current = new_node        # Move the current pointer to the new node
+
+        return head
+
+    @staticmethod
+    def print(head:'DoublyLinkedListNode'):
+        if head is None:
+            print("The list is empty.")
+            return
+
+        current = head # Start at the head of the list
+        while current:
+            # Print the current node's data
+            print(current.data, end=" <-> " if current.next else "")
+            current = current.next  # Move to the next node
+        print()
+    
+    @staticmethod
+    def to_list(head:'DoublyLinkedListNode') -> list:
+        """
+        Converts the Doubly Linked List (DLL) into a list.
+
+        This method traverses the doubly linked list starting from the head node,
+        collecting each node's data and appending it to a Python list.
+
+        Args:
+            head (DoublyLinkedListNode): head of Doubly Linked List.
+
+        Returns:
+            list: A Python list containing all the elements from the DLL.
+        """
+        result = []
+        current = head
+
+        # Traverse through the doubly linked list and collect data
+        while current:
+            result.append(current.data)  # Add the node's data to the list
+            current = current.next       # Move to the next node
+        
+        return result
+
+    @staticmethod
+    def compare(head1:'DoublyLinkedListNode',head2:'DoublyLinkedListNode') -> bool:
+        """
+        Compares two doubly linked lists by their head nodes.
+
+        This method traverses both lists simultaneously and checks if they have
+        the same length and the same values at each corresponding node.
+
+        Args:
+            head1 (Node): The head node of the first doubly linked list.
+            head2 (Node): The head node of the second doubly linked list.
+
+        Returns:
+            bool: True if the two doubly linked lists are equal, False otherwise.
+        """
+        current1 = head1
+        current2 = head2
+
+        # Traverse both lists at the same time
+        while current1 and current2:
+            if current1.data != current2.data:  # Compare data of corresponding nodes
+                return False
+            current1 = current1.next  # Move to the next node in the first list
+            current2 = current2.next  # Move to the next node in the second list
+
+        # If one list is longer than the other, return False
+        if current1 or current2:
+            return False
+
+        return True  # If all nodes match and both lists are of the same length
+
 def runtime(func:callable):
     start_time = time.time()
     func()
