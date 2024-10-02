@@ -3,29 +3,29 @@ import string
 import time
 from typing import Any, Counter, List, NamedTuple, Optional, Tuple
 
-class ListNode:
+class LinkedListNode:
     def __init__(self, val=None, next=None):
         self.val:Any = val
-        self.next:ListNode = next
+        self.next:LinkedListNode = next
 
     @staticmethod
     def _static_init_list(l:List):
         if len(l) == 0: return None
-        head = ListNode(l[0])
+        head = LinkedListNode(l[0])
         cur_head = head
         for v in l[1:]:
-            cur_head.next = ListNode(v)
+            cur_head.next = LinkedListNode(v)
             cur_head = cur_head.next
         return head
 
     @staticmethod
-    def _static_print_list(head:'ListNode'):
+    def _static_print_list(head:'LinkedListNode'):
         while head:
             print(head.val)
             head = head.next
     
     @staticmethod
-    def _static_get_list(head:'ListNode'):
+    def _static_get_list(head:'LinkedListNode'):
         list = []
         while head:
             list.append(head.val)
@@ -105,7 +105,7 @@ class main_exercises():
         def failed_message(message:str) -> str: return f'{RED}{message}{END}'
 
         def test_result_pass(test_case:TestCase) -> bool:
-            if isinstance(test_case.result,ListNode) and isinstance(test_case.expected,ListNode): return s.compare_linkedlist(test_case.result,test_case.expected)
+            if isinstance(test_case.result,LinkedListNode) and isinstance(test_case.expected,LinkedListNode): return s.compare_linkedlist(test_case.result,test_case.expected)
             if isinstance(test_case.result,TreeNode) and isinstance(test_case.expected,TreeNode): return s.compare_tree(test_case.result,test_case.expected)
             return test_case.result == test_case.expected
 
@@ -117,7 +117,7 @@ class main_exercises():
             message = f'Case {i+1}: {test_result}'
             if show_details:
                 result, expected = test_cases[i].result, test_cases[i].expected
-                if isinstance(result,ListNode) and isinstance(expected,ListNode): result, expected = ListNode._static_get_list(result), ListNode._static_get_list(expected)
+                if isinstance(result,LinkedListNode) and isinstance(expected,LinkedListNode): result, expected = LinkedListNode._static_get_list(result), LinkedListNode._static_get_list(expected)
                 elif isinstance(result,TreeNode) and isinstance(expected,TreeNode): result, expected = TreeNode.get_list(result), TreeNode.get_list(expected)
                 message += f'\n   Result:   {result}\n   Expected: {expected}'
             print(message)
@@ -176,9 +176,9 @@ class main_exercises():
                 else: num_set.add(tem_sum)
 
     def double_it_test(s):
-        s.test1(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([1,8,9]))),[3,7,8])
-        s.test1(ListNode._static_get_list(s.doubleIt(ListNode._static_init_list([9,9,9]))),[1,9,9,8])
-    def doubleIt(s, head: Optional[ListNode]) -> Optional[ListNode]:
+        s.test1(LinkedListNode._static_get_list(s.doubleIt(LinkedListNode._static_init_list([1,8,9]))),[3,7,8])
+        s.test1(LinkedListNode._static_get_list(s.doubleIt(LinkedListNode._static_init_list([9,9,9]))),[1,9,9,8])
+    def doubleIt(s, head: Optional[LinkedListNode]) -> Optional[LinkedListNode]:
         stack = []
         while head:
             stack.append(head.val)
@@ -188,7 +188,7 @@ class main_exercises():
         if cur_stack > 9: 
             cur_stack -= 10
             r = 1
-        new_head = ListNode(cur_stack)
+        new_head = LinkedListNode(cur_stack)
         while stack:
             cur_stack = stack.pop()
             cur_stack*=2
@@ -198,11 +198,11 @@ class main_exercises():
             if cur_stack > 9: 
                 cur_stack -= 10
                 r = 1
-            cur_node = ListNode(cur_stack)
+            cur_node = LinkedListNode(cur_stack)
             cur_node.next = new_head
             new_head = cur_node
         if r == 1:
-            cur_node = ListNode(1)
+            cur_node = LinkedListNode(1)
             cur_node.next = new_head
             new_head = cur_node
         return new_head
@@ -360,7 +360,7 @@ class main_exercises():
         return None
     
     def compare_linkedlist_test(s):
-        def short_func(list1:List,list2:List): return s.compare_linkedlist(ListNode._static_init_list(list1),ListNode._static_init_list(list2))
+        def short_func(list1:List,list2:List): return s.compare_linkedlist(LinkedListNode._static_init_list(list1),LinkedListNode._static_init_list(list2))
         s.test2([
             TestCase(short_func([],[]),True),
             TestCase(short_func([1,2,3,4],[1,2,3,4]),True),
@@ -379,7 +379,7 @@ class main_exercises():
             TestCase(short_func([[]],[[]]),True),
             TestCase(short_func([math.nan],[math.nan]),False),
         ])
-    def compare_linkedlist(s,head1: Optional[ListNode],head2: Optional[ListNode]) -> bool:
+    def compare_linkedlist(s,head1: Optional[LinkedListNode],head2: Optional[LinkedListNode]) -> bool:
         while head1 or head2:
             if (head1 is None or head2 is None 
                 or type(head1.val)!=type(head2.val) 
@@ -390,7 +390,7 @@ class main_exercises():
         return True
 
     def reverse_linkedlist_test(s):
-        ctll = ListNode._static_init_list #convert to linked list
+        ctll = LinkedListNode._static_init_list #convert to linked list
         tm = s.reverse_linkedlist #testing method
         s.test2([
             TestCase(tm(ctll([])),ctll([])),
@@ -404,7 +404,7 @@ class main_exercises():
             TestCase(tm(ctll([1, None, 3, None, 5])),ctll([5, None, 3, None, 1])),
             TestCase(tm(ctll([[1, 2], [3, 4], [5, 6]])),ctll([[5, 6], [3, 4], [1, 2]])),
         ])
-    def reverse_linkedlist(s,head: Optional[ListNode]) -> Optional[ListNode]:
+    def reverse_linkedlist(s,head: Optional[LinkedListNode]) -> Optional[LinkedListNode]:
         '''by chatgpt'''
         prev = None
         current = head
@@ -565,7 +565,7 @@ class main_exercises():
         return d(l)
     
     def linked_list_delete_duplicates_test(s):
-        ctll = ListNode._static_init_list #convert to linked list
+        ctll = LinkedListNode._static_init_list #convert to linked list
         tm = s.linked_list_delete_duplicates #testing method
         s.test2([
             TestCase(tm(ctll([1,2,3,3,4,4,5])),ctll([1,2,5])),
@@ -575,13 +575,13 @@ class main_exercises():
             TestCase(tm(ctll([2,2,3])),ctll([3])),
             TestCase(tm(ctll([3,5,5])),ctll([3])),
         ])
-    def linked_list_delete_duplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def linked_list_delete_duplicates(self, head: Optional[LinkedListNode]) -> Optional[LinkedListNode]:
         '''by chatgpt'''
         if not head:
             return None
 
         # Dummy node to handle edge cases easily
-        new_head = ListNode(0)
+        new_head = LinkedListNode(0)
         new_head.next = head
         prev = new_head  # The last node before the sequence of duplicates
 
