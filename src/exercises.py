@@ -193,7 +193,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.num_of_cross_matrix_test)
+        runtime(s.doubly_linked_list_test)
         # pass
 
     def test1(s,result,expected):
@@ -212,6 +212,7 @@ class main_exercises():
         def test_result_pass(test_case:TestCase) -> bool:
             if isinstance(test_case.result,LinkedListNode) and isinstance(test_case.expected,LinkedListNode): return s.compare_linkedlist(test_case.result,test_case.expected)
             if isinstance(test_case.result,TreeNode) and isinstance(test_case.expected,TreeNode): return s.compare_tree(test_case.result,test_case.expected)
+            if isinstance(test_case.result,DoublyLinkedListNode) and isinstance(test_case.expected,DoublyLinkedListNode): return DoublyLinkedListNode.compare(test_case.result,test_case.expected)
             return test_case.result == test_case.expected
 
         for i in range(len(test_cases)): 
@@ -219,12 +220,18 @@ class main_exercises():
                 test_result = successed_message('Passed')
                 passed_count+=1
             else: test_result = failed_message('Failed')
+
             message = f'Case {i+1}: {test_result}'
+
             if show_details:
                 result, expected = test_cases[i].result, test_cases[i].expected
+
                 if isinstance(result,LinkedListNode) and isinstance(expected,LinkedListNode): result, expected = LinkedListNode._static_get_list(result), LinkedListNode._static_get_list(expected)
                 elif isinstance(result,TreeNode) and isinstance(expected,TreeNode): result, expected = TreeNode.get_list(result), TreeNode.get_list(expected)
+                elif isinstance(result,DoublyLinkedListNode) and isinstance(expected,DoublyLinkedListNode): result, expected = DoublyLinkedListNode.to_list(result), DoublyLinkedListNode.to_list(expected)
+
                 message += f'\n   Result:   {result}\n   Expected: {expected}'
+
             print(message)
 
         print()
@@ -878,3 +885,14 @@ class main_exercises():
         
         return cross_count
     
+    def doubly_linked_list_test(s):
+        tm = s.doubly_linked_list #testing method
+        s.test2([
+            # TestCase(tm([]), 0),  # Edge case: empty list should return an empty list
+            TestCase(DoublyLinkedListNode.to_dll([1,2,3,4]), DoublyLinkedListNode.to_dll([1,2,3,4])),
+            TestCase(DoublyLinkedListNode.to_dll([1,2,3,4]), DoublyLinkedListNode.to_dll([1,2,3,4,5])),
+            TestCase(DoublyLinkedListNode.to_dll([1,2,3,4]), DoublyLinkedListNode.to_dll([1,2,3,5])),
+            TestCase(DoublyLinkedListNode.to_dll([]), DoublyLinkedListNode.to_dll([])),
+        ])
+    def doubly_linked_list(s,matrix:List[List[int]])->int:
+        return
