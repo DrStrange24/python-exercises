@@ -88,7 +88,7 @@ class TestCase(NamedTuple):
 
 class main_exercises():
     def __init__(s):
-        runtime(s.filter_primes_test)
+        runtime(s.num_of_cross_matrix_test)
         # pass
 
     def test1(s,result,expected):
@@ -717,3 +717,59 @@ class main_exercises():
                     return False
             return True
         return [n for n in num_list if is_prime(n)]
+    
+    def num_of_cross_matrix_test(s):
+        '''
+        I forgot about the problem
+        '''
+        tm = s.num_of_cross_matrix #testing method
+        s.test2([
+            TestCase(tm([]), 0),  # Edge case: empty list should return an empty list
+            TestCase(tm([
+                [1,1,1,1],
+                [2,3,1,1],
+                [1,1,1,0],
+                [1,4,1,1],
+            ]), 2),
+            TestCase(tm([
+                [1,2],
+                [2,1],
+            ]), 4),
+            TestCase(tm([
+                [2,3],
+            ]), 2),
+        ],True)
+    def num_of_cross_matrix(s,matrix:List[List[int]])->int:
+        if not matrix or not matrix[0]:
+            return 0
+        
+        n, m = len(matrix), len(matrix[0])
+        cross_count = 0
+
+        # Helper function to check if a valid cross of arm length l can be formed
+        def is_valid_cross(i, j, l):
+            if (i - l < 0 or i + l >= n or j - l < 0 or j + l >= m):
+                return False  # Out of bounds
+            
+            # Get the arm values at distance l from the center
+            up = matrix[i - l][j]
+            down = matrix[i + l][j]
+            left = matrix[i][j - l]
+            right = matrix[i][j + l]
+            
+            # All arms must be equal and distinct from the center
+            return up == down == left == right != matrix[i][j]
+        
+        # Iterate over each cell in the matrix
+        for i in range(n):
+            for j in range(m):
+                l = 0  # Start with arm length 0
+                # Arm length 0 is always a valid cross (just the center itself)
+                cross_count += 1
+                l = 1  # Check for larger arm lengths
+                while is_valid_cross(i, j, l):
+                    cross_count += 1  # Valid cross found
+                    l += 1  # Try to extend the arm length
+        
+        return cross_count
+    
